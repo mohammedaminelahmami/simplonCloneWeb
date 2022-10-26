@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="simplonCloneWebb:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>simplonCloneWebb</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="simplonCloneWebb-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="simplonCloneWebb:war exploded" />
+    </root>
+  </artifact>
+</component>

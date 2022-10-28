@@ -3,13 +3,11 @@ package com.example.simploncloneweb.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "admin", schema = "public", catalog = "simplonCloneWeb")
-// @NamedQuery("AdminEntity.find", "select bla bla ...")
-public class AdminEntity {
+public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private long id;
+    private Integer id;
     @Basic
     @Column(name = "username")
     private String username;
@@ -19,12 +17,18 @@ public class AdminEntity {
     @Basic
     @Column(name = "email")
     private String email;
+    @Basic
+    @Column(name = "nom")
+    private String nom;
+    @Basic
+    @Column(name = "prenom")
+    private String prenom;
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -52,27 +56,47 @@ public class AdminEntity {
         this.email = email;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AdminEntity that = (AdminEntity) o;
+        Admin admin = (Admin) o;
 
-        if (id != that.id) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (id != null ? !id.equals(admin.id) : admin.id != null) return false;
+        if (username != null ? !username.equals(admin.username) : admin.username != null) return false;
+        if (password != null ? !password.equals(admin.password) : admin.password != null) return false;
+        if (email != null ? !email.equals(admin.email) : admin.email != null) return false;
+        if (nom != null ? !nom.equals(admin.nom) : admin.nom != null) return false;
+        if (prenom != null ? !prenom.equals(admin.prenom) : admin.prenom != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (nom != null ? nom.hashCode() : 0);
+        result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
         return result;
     }
 }

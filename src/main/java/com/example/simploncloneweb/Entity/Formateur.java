@@ -2,12 +2,15 @@ package com.example.simploncloneweb.Entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+import java.util.Collection;
+
 @Entity
-@Table(name = "formaterur", schema = "public", catalog = "simplonCloneWeb")
-public class FormaterurEntity {
-    @Basic
+public class Formateur {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column(name = "id")
-    private long id;
+    private Integer id;
     @Basic
     @Column(name = "username")
     private String username;
@@ -23,16 +26,17 @@ public class FormaterurEntity {
     @Basic
     @Column(name = "prenom")
     private String prenom;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "idPromo")
-    private long idPromo;
+    @Basic
+    @Column(name = "created_at")
+    private Timestamp createdAt;
+    @OneToMany(mappedBy = "idformateur")
+    private Collection<Promotion> promotionsById;
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -76,12 +80,12 @@ public class FormaterurEntity {
         this.prenom = prenom;
     }
 
-    public long getIdPromo() {
-        return idPromo;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setIdPromo(long idPromo) {
-        this.idPromo = idPromo;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
@@ -89,28 +93,36 @@ public class FormaterurEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FormaterurEntity that = (FormaterurEntity) o;
+        Formateur formateur = (Formateur) o;
 
-        if (id != that.id) return false;
-        if (idPromo != that.idPromo) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
-        if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
+        if (id != null ? !id.equals(formateur.id) : formateur.id != null) return false;
+        if (username != null ? !username.equals(formateur.username) : formateur.username != null) return false;
+        if (password != null ? !password.equals(formateur.password) : formateur.password != null) return false;
+        if (email != null ? !email.equals(formateur.email) : formateur.email != null) return false;
+        if (nom != null ? !nom.equals(formateur.nom) : formateur.nom != null) return false;
+        if (prenom != null ? !prenom.equals(formateur.prenom) : formateur.prenom != null) return false;
+        if (createdAt != null ? !createdAt.equals(formateur.createdAt) : formateur.createdAt != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
         result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
-        result = 31 * result + (int) (idPromo ^ (idPromo >>> 32));
+        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         return result;
+    }
+
+    public Collection<Promotion> getPromotionsById() {
+        return promotionsById;
+    }
+
+    public void setPromotionsById(Collection<Promotion> promotionsById) {
+        this.promotionsById = promotionsById;
     }
 }

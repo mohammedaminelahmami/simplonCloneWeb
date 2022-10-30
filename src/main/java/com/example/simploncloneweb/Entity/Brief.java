@@ -3,6 +3,7 @@ package com.example.simploncloneweb.Entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "brief", schema = "public", catalog = "simplonCloneWeb")
 public class Brief {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,7 +19,7 @@ public class Brief {
     @Column(name = "promoid")
     private Integer promoid;
     @ManyToOne
-    @JoinColumn(name = "promoid", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "promoid", referencedColumnName = "id",insertable = false, updatable = false)
     private Promotion promotionByPromoid;
 
     public Integer getId() {

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "apprenant", schema = "public", catalog = "simplonCloneWeb")
 public class Apprenant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -29,13 +30,13 @@ public class Apprenant {
     @Column(name = "idpromo")
     private Integer idpromo;
     @Basic
-    @Column(name = "created_at")
+    @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
     @Basic
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", insertable = false, updatable = false)
     private Timestamp updatedAt;
     @ManyToOne
-    @JoinColumn(name = "idpromo", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idpromo", referencedColumnName = "id", insertable = false, updatable = false)
     private Promotion promotionByIdpromo;
 
     public Integer getId() {

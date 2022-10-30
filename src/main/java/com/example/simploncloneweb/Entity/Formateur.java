@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
+@Table(name = "formateur", schema = "public", catalog = "simplonCloneWeb")
 public class Formateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

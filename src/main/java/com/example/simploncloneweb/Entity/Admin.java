@@ -3,6 +3,7 @@ package com.example.simploncloneweb.Entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "admin", schema = "public", catalog = "simplonCloneWeb")
 public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

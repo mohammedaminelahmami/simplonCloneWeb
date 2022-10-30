@@ -1,12 +1,12 @@
 package com.example.simploncloneweb.dao.interfaces;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface UseDao<T> {
-    boolean save(T entityObj);
-    boolean update(T entityObj);
-    boolean delete(int id);
-    List<T> get(int id);
-    Collection<T> getAll();
+    void save(T entityObj);
+    boolean update(int id, T entityObj);
+    boolean delete(int id, T entityObj);
+    Optional<T> find(int id);
+    List<T> getAll();
 }

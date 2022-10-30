@@ -9,7 +9,7 @@ import java.util.List;
 class UseDaoImplTest {
 
     @Test
-    void getAllTest()
+    void testGetAll()
     {
         System.out.println("start-----------------------------------------------------");
 
@@ -17,16 +17,12 @@ class UseDaoImplTest {
         List<Apprenant> list = useDao.getAll();
 
         System.out.println(list);
-        for(int i = 0; i < list.size(); i++)
-        {
-            System.out.println(list.get(i));
-        }
 
         System.out.println("end-------------------------------------------------------");
     }
 
     @Test
-    void save() {
+    void testSave() {
         // test insert Record :
         System.out.println("start-----------------------------------------------------");
 
@@ -44,8 +40,31 @@ class UseDaoImplTest {
 
         System.out.println("end-------------------------------------------------------");
     }
+
+    @Test
+    void testUpdate()
+    {
+        System.out.println("start-----------------------------------------------------");
+        UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
+        Apprenant objetApprenant = new Apprenant();
+
+        //
+
+        System.out.println("end-------------------------------------------------------");
+    }
+
+    @Test
+    void find()
+    {
+        System.out.println("start-----------------------------------------------------");
+
+        UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
+
+        if(useDao.find(2).isPresent())
+        {
+            System.out.println(useDao.find(2).get());
+        }
+
+        System.out.println("end-------------------------------------------------------");
+    }
 }
-
-
-
-

@@ -3,10 +3,9 @@ package com.example.simploncloneweb.dao;
 import com.example.simploncloneweb.dao.interfaces.UseDao;
 import com.example.simploncloneweb.helper.PersistenceManager;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UseDaoImpl<T> implements UseDao<T> {
     protected Class<T> entityClass;
@@ -15,53 +14,56 @@ public class UseDaoImpl<T> implements UseDao<T> {
         this.entityClass = entityClass;
     }
 
-    // insert record //
     @Override
-    public boolean save(T entityObj) {
+    public void save(T entityObj) {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try {
             entityManager.persist(entityObj);
             PersistenceManager.commitTransaction(entityManager);
-            return true;
         } catch (Exception e) {
-            e.printStackTrace();
             PersistenceManager.rollbackTransaction(entityManager);
-            return false;
-        }
-    }
-    // ------------- //
-
-    @Override
-    public boolean update(T entityObj) {
-        try {
-
-            return true;
-        } catch (Exception e) {
-
-            return false;
-        }
-    }
-
-    @Override
-    public boolean delete(int id) {
-        try {
-
-            return true;
-        } catch (Exception e) {
-
-            return false;
-        }
-    }
-
-    // ????
-    @Override
-    public List<T> get(int id) {
-        try {
-
-            return null;
-        } catch (Exception e) {
             e.printStackTrace();
-            return null;
+        }
+    }
+
+    @Override
+    public boolean update(int id, T entityObj) {
+        EntityManager entityManager = PersistenceManager.beginTransaction();
+        try {
+            entityManager.merge(entityObj);
+            PersistenceManager.commitTransaction(entityManager);
+            return true;
+        } catch (Exception e) {
+            PersistenceManager.rollbackTransaction(entityManager);
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delete(int id, T entityObj) {
+        EntityManager entityManager = PersistenceManager.beginTransaction();
+        try {
+            PersistenceManager.commitTransaction(entityManager);
+            return true;
+        } catch (Exception e) {
+            PersistenceManager.rollbackTransaction(entityManager);
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public Optional<T> find(int id) {
+        EntityManager entityManager = PersistenceManager.beginTransaction();
+        try {
+            Optional<T> t = Optional.ofNullable(entityManager.find(entityClass, id));
+            PersistenceManager.commitTransaction(entityManager);
+            return t;
+        } catch (Exception e) {
+            PersistenceManager.rollbackTransaction(entityManager);
+            e.printStackTrace();
+            return Optional.empty();
         }
     }
 
@@ -73,8 +75,8 @@ public class UseDaoImpl<T> implements UseDao<T> {
             PersistenceManager.commitTransaction(entityManager); // commit
             return list;
         } catch (Exception e) {
-            e.printStackTrace();
             PersistenceManager.rollbackTransaction(entityManager); // rollback
+            e.printStackTrace();
             return null;
         }
     }

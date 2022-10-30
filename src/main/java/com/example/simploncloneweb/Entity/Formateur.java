@@ -28,7 +28,7 @@ public class Formateur {
     @Column(name = "prenom")
     private String prenom;
     @Basic
-    @Column(name = "created_at")
+    @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
     @OneToMany(mappedBy = "idformateur")
     private Collection<Promotion> promotionsById;

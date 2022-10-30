@@ -60,10 +60,18 @@ class UseDaoImplTest {
 
         UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
 
-        if(useDao.find(2).isPresent())
-        {
-            System.out.println(useDao.find(2).get());
-        }
+        System.out.println(useDao.find(2));
+
+        System.out.println("end-------------------------------------------------------");
+    }
+
+    @Test
+    void delete()
+    {
+        System.out.println("start-----------------------------------------------------");
+
+        UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
+        useDao.delete(2);
 
         System.out.println("end-------------------------------------------------------");
     }

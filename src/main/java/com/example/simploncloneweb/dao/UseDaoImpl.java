@@ -41,9 +41,15 @@ public class UseDaoImpl<T> implements UseDao<T> {
     }
 
     @Override
-    public boolean delete(int id, T entityObj) {
+    public boolean delete(int id) {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try {
+            T t = find(id);
+            if(t != null)
+            {
+               T a = entityManager.merge(t);
+                entityManager.remove(a);
+            }
             PersistenceManager.commitTransaction(entityManager);
             return true;
         } catch (Exception e) {
@@ -54,16 +60,16 @@ public class UseDaoImpl<T> implements UseDao<T> {
     }
 
     @Override
-    public Optional<T> find(int id) {
+    public T find(int id) {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try {
-            Optional<T> t = Optional.ofNullable(entityManager.find(entityClass, id));
+            T t = entityManager.find(entityClass, id);
             PersistenceManager.commitTransaction(entityManager);
             return t;
         } catch (Exception e) {
             PersistenceManager.rollbackTransaction(entityManager);
             e.printStackTrace();
-            return Optional.empty();
+            return null;
         }
     }
 

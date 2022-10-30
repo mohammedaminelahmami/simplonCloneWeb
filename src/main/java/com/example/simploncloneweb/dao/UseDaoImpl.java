@@ -5,7 +5,6 @@ import com.example.simploncloneweb.helper.PersistenceManager;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
-import java.util.Optional;
 
 public class UseDaoImpl<T> implements UseDao<T> {
     protected Class<T> entityClass;
@@ -15,14 +14,16 @@ public class UseDaoImpl<T> implements UseDao<T> {
     }
 
     @Override
-    public void save(T entityObj) {
+    public boolean save(T entityObj) {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try {
             entityManager.persist(entityObj);
             PersistenceManager.commitTransaction(entityManager);
+            return true;
         } catch (Exception e) {
             PersistenceManager.rollbackTransaction(entityManager);
             e.printStackTrace();
+            return false;
         }
     }
 

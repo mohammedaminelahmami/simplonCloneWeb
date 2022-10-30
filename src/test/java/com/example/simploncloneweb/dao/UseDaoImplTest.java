@@ -54,7 +54,7 @@ class UseDaoImplTest {
     }
 
     @Test
-    void find()
+    void testFind()
     {
         System.out.println("start-----------------------------------------------------");
 
@@ -66,7 +66,7 @@ class UseDaoImplTest {
     }
 
     @Test
-    void delete()
+    void testDelete()
     {
         System.out.println("start-----------------------------------------------------");
 

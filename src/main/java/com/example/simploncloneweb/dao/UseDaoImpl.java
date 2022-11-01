@@ -1,8 +1,10 @@
 package com.example.simploncloneweb.dao;
 
+import com.example.simploncloneweb.Entity.Apprenant;
 import com.example.simploncloneweb.dao.interfaces.UseDao;
 import com.example.simploncloneweb.helper.PersistenceManager;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class UseDaoImpl<T> implements UseDao<T> {
     public boolean delete(int id) {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try {
-            T t = find(id);
+            T t = findById(id);
             if(t != null)
             {
                T a = entityManager.merge(t);
@@ -61,7 +63,7 @@ public class UseDaoImpl<T> implements UseDao<T> {
     }
 
     @Override
-    public T find(int id) {
+    public T findById(int id) {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try {
             T t = entityManager.find(entityClass, id);
@@ -85,6 +87,42 @@ public class UseDaoImpl<T> implements UseDao<T> {
             PersistenceManager.rollbackTransaction(entityManager); // rollback
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public boolean checkIfExist(String username)
+    {
+        EntityManager entityManager = PersistenceManager.beginTransaction();
+        try{
+            Query query = entityManager.createQuery("select e.username from "+entityClass.getSimpleName()+" e where e.username = '"+username+"'", entityClass);
+            PersistenceManager.commitTransaction(entityManager);
+            return query.getResultList().size() > 0;
+        }catch(Exception e)
+        {
+            PersistenceManager.rollbackTransaction(entityManager);
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean login(String username, String password)
+    {
+        EntityManager entityManager = PersistenceManager.beginTransaction();
+        try{
+            if(checkIfExist(username))
+            {
+                Query query = entityManager.createQuery("select e.password from "+entityClass.getSimpleName()+" e where e.username = '"+username+"'", entityClass);
+                PersistenceManager.commitTransaction(entityManager);
+                return query.getResultList().get(0).equals(password);
+            }else{
+                return false;
+            }
+        }catch(Exception e)
+        {
+            PersistenceManager.rollbackTransaction(entityManager);
+            e.printStackTrace();
+            return false;
         }
     }
 }

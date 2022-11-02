@@ -1,6 +1,5 @@
 package com.example.simploncloneweb.dao;
 
-import com.example.simploncloneweb.Entity.Apprenant;
 import com.example.simploncloneweb.dao.interfaces.UseDao;
 import com.example.simploncloneweb.helper.PersistenceManager;
 import jakarta.persistence.EntityManager;

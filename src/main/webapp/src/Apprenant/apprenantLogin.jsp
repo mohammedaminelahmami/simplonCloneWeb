@@ -17,7 +17,7 @@
                                     <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">Simplon Clone</h4>
                                 </div>
                                     <p class="mb-4">Please login to your account</p>
-                                    <form action="" class="mb-4" method="POST">
+                                    <form action="${pageContext.request.contextPath}/home" class="mb-4" method="POST">
                                         <input
                                             type="text"
                                             class="mb-4 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"

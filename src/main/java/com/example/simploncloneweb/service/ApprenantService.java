@@ -10,9 +10,4 @@ public class ApprenantService {
         UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
         return useDao.login(username, password);
     }
-
-    public static void logout()
-    {
-
-    }
 }

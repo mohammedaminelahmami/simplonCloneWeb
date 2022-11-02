@@ -52,8 +52,8 @@
                             </div>
                         </div>
                         <div
-                                class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
-                                style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);"
+                            class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
+                            style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);"
                         >
                             <div class="text-white px-4 py-6 md:p-12 md:mx-6">
                                 <h4 class="text-xl font-semibold mb-6">La plateforme collaborative d'apprentissage en pedagogie active</h4>

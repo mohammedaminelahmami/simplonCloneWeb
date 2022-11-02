@@ -7,7 +7,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-
 @WebServlet({"/", "/home", "/logout"})
 public class ApprenantController extends HttpServlet {
     @Override
@@ -28,10 +27,10 @@ public class ApprenantController extends HttpServlet {
                 HttpSession session = req.getSession();
                 if(session.getAttribute("user") == null)
                 {
-                    req.getRequestDispatcher("./src/Apprenant/apprenantLogin.jsp").forward(req, resp);
+                    req.getRequestDispatcher("./Apprenant/apprenantLogin.jsp").forward(req, resp);
                     return;
                 }
-                req.getRequestDispatcher("./src/Apprenant/home.jsp").forward(req, resp);
+                req.getRequestDispatcher("./Apprenant/home.jsp").forward(req, resp);
                 break;
             }
             case "/home":
@@ -47,12 +46,12 @@ public class ApprenantController extends HttpServlet {
                         Apprenant apprenant = new Apprenant();
                         HttpSession session = req.getSession();
                         session.setAttribute("user", apprenant);
-                        req.getRequestDispatcher("./src/Apprenant/home.jsp").forward(req, resp);
+                        req.getRequestDispatcher("./Apprenant/home.jsp").forward(req, resp);
                     }else{
-                        req.getRequestDispatcher("./src/Apprenant/apprenantLogin.jsp").forward(req, resp);
+                        req.getRequestDispatcher("./Apprenant/apprenantLogin.jsp").forward(req, resp);
                     }
                 }else{
-                    req.getRequestDispatcher("./src/Apprenant/home.jsp").forward(req, resp);
+                    req.getRequestDispatcher("./Apprenant/home.jsp").forward(req, resp);
                 }
                 break;
             }

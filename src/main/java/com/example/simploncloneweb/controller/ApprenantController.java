@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-@WebServlet({"/", "/home", "/logout"})
+@WebServlet({"/", "/apprenant/login", "/home", "/logout"})
 public class ApprenantController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,12 +25,18 @@ public class ApprenantController extends HttpServlet {
             case "/":
             {
                 HttpSession session = req.getSession();
+                if(session.getAttribute("user") != null) resp.sendRedirect("/home");
+                break;
+            }
+            case "/apprenant/login":
+            {
+                HttpSession session = req.getSession();
                 if(session.getAttribute("user") == null)
                 {
-                    req.getRequestDispatcher("./Apprenant/apprenantLogin.jsp").forward(req, resp);
+                    req.getRequestDispatcher("../Apprenant/apprenantLogin.jsp").forward(req, resp);
                     return;
                 }
-                req.getRequestDispatcher("./Apprenant/home.jsp").forward(req, resp);
+                resp.sendRedirect("/home");
                 break;
             }
             case "/home":
@@ -45,9 +51,9 @@ public class ApprenantController extends HttpServlet {
                     {
                         Apprenant apprenant = new Apprenant();
                         session.setAttribute("user", apprenant);
-                        req.getRequestDispatcher("./Apprenant/home.jsp").forward(req, resp);
+                        resp.sendRedirect("/home");
                     }else{
-                        req.getRequestDispatcher("./Apprenant/apprenantLogin.jsp").forward(req, resp);
+                        req.getRequestDispatcher("../Apprenant/apprenantLogin.jsp").forward(req, resp);
                     }
                 }else{
                     req.getRequestDispatcher("./Apprenant/home.jsp").forward(req, resp);
@@ -58,7 +64,8 @@ public class ApprenantController extends HttpServlet {
             {
                 HttpSession session = req.getSession();
                 session.removeAttribute("user");
-                resp.sendRedirect("/");
+                session.invalidate();
+                resp.sendRedirect("/apprenant/login");
                 break;
             }
         }

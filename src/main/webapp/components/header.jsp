@@ -4,6 +4,7 @@
 <head>
   <title> SimplonClone </title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
   <script>
     tailwind.config = {
       theme: {

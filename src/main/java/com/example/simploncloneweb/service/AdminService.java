@@ -10,4 +10,6 @@ public class AdminService {
         UseDaoImpl<Admin> useDao = new UseDaoImpl<>(Admin.class);
         return useDao.login(username, password);
     }
+
+
 }

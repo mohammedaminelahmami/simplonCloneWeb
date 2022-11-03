@@ -18,7 +18,10 @@
     </div>
     <div>
         <jsp:include page="../components/apprenantComponents/bodyPromo.jsp"/>
+        <jsp:include page="../components/apprenantComponents/briefComponent.jsp"/>
     </div>
 </div>
 
-<jsp:include page="../components/footer.jsp"/>
+<div class="mt-5">
+    <jsp:include page="../components/footer.jsp"/>
+</div>

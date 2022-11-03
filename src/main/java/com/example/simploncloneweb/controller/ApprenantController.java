@@ -10,7 +10,7 @@ import java.io.IOException;
 @WebServlet({"/", "/home", "/logout"})
 public class ApprenantController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Mapping(req, resp);
     }
     @Override
@@ -35,8 +35,8 @@ public class ApprenantController extends HttpServlet {
             }
             case "/home":
             {
-                HttpSession sessionT = req.getSession();
-                if(sessionT.getAttribute("user") == null)
+                HttpSession session = req.getSession();
+                if(session.getAttribute("user") == null)
                 {
                     String username = req.getParameter("username");
                     String password = req.getParameter("password");
@@ -44,7 +44,6 @@ public class ApprenantController extends HttpServlet {
                     if(ApprenantService.login(username, password))
                     {
                         Apprenant apprenant = new Apprenant();
-                        HttpSession session = req.getSession();
                         session.setAttribute("user", apprenant);
                         req.getRequestDispatcher("./Apprenant/home.jsp").forward(req, resp);
                     }else{

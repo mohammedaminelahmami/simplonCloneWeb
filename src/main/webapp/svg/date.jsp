@@ -1,16 +1,1 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: YC
-  Date: 11/2/2022
-  Time: 3:06 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
-</html>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="sc-bf0a440d-0 jdUYLw"><path d="M17.4444 5.5L6.55556 5.5C5.69645 5.5 5 6.17157 5 7L5 17.5C5 18.3284 5.69645 19 6.55556 19H17.4444C18.3036 19 19 18.3284 19 17.5V7C19 6.17157 18.3036 5.5 17.4444 5.5Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="colorStroke"></path><path d="M15 4V6.8125" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="colorStroke"></path><path d="M9 4V6.8125" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="colorStroke"></path><path d="M5 9.625L19 9.625" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="colorStroke"></path></svg>

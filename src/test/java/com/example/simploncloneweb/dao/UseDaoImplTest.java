@@ -8,14 +8,22 @@ class UseDaoImplTest {
     @Test
     void checkIfExistTestWithValidUsername()
     {
-        UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
-        assertTrue(useDao.checkIfExist("hichamov"));
+        AuthDao<Apprenant> authDao = new AuthDao<>(Apprenant.class);
+        assertTrue(authDao.checkIfExist("hichamov"));
     }
 
     @Test
     void loginWithValidUsernameAndPassword()
     {
-        UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
-        assertTrue(useDao.login("amine0029", "amine0029"));
+        AuthDao<Apprenant> authDao = new AuthDao<>(Apprenant.class);
+        assertTrue(authDao.login("amine0029", "amine0029"));
+    }
+
+    @Test
+    void testToCharArray()
+    {
+        String name = "amine";
+        char[] nameArray = name.toCharArray();
+        System.out.println();
     }
 }

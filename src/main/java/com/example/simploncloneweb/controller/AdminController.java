@@ -71,6 +71,7 @@ public class AdminController extends HttpServlet {
                         resp.sendRedirect("/dashboard");
                     }else{
                         System.out.println("Error !!");
+                        resp.sendRedirect("/dashboard");
                     }
                     return;
                 }

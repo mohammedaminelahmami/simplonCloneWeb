@@ -8,6 +8,4 @@ public interface UseDao<T> {
     boolean delete(int id);
     T findById(int id);
     List<T> getAll();
-    boolean checkIfExist(String username);
-    boolean login(String username, String password);
 }

@@ -27,7 +27,7 @@ public class UseDaoImpl<T> implements UseDao<T> {
             return false;
         }
     }
-
+    // ???????????????????
     @Override
     public boolean update(int id, T entityObj) {
         EntityManager entityManager = PersistenceManager.beginTransaction();
@@ -49,7 +49,7 @@ public class UseDaoImpl<T> implements UseDao<T> {
             T t = findById(id);
             if(t != null)
             {
-               T a = entityManager.merge(t);
+                T a = entityManager.merge(t);
                 entityManager.remove(a);
             }
             PersistenceManager.commitTransaction(entityManager);
@@ -86,42 +86,6 @@ public class UseDaoImpl<T> implements UseDao<T> {
             PersistenceManager.rollbackTransaction(entityManager); // rollback
             e.printStackTrace();
             return null;
-        }
-    }
-
-    @Override
-    public boolean checkIfExist(String username)
-    {
-        EntityManager entityManager = PersistenceManager.beginTransaction();
-        try{
-            Query query = entityManager.createQuery("select e.username from "+entityClass.getSimpleName()+" e where e.username = '"+username+"'", entityClass);
-            PersistenceManager.commitTransaction(entityManager);
-            return query.getResultList().size() > 0;
-        }catch(Exception e)
-        {
-            PersistenceManager.rollbackTransaction(entityManager);
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean login(String username, String password)
-    {
-        EntityManager entityManager = PersistenceManager.beginTransaction();
-        try{
-            if(checkIfExist(username))
-            {
-                Query query = entityManager.createQuery("select e.password from "+entityClass.getSimpleName()+" e where e.username = '"+username+"'", entityClass);
-                PersistenceManager.commitTransaction(entityManager);
-                return query.getResultList().get(0).equals(password);
-            }else{
-                return false;
-            }
-        }catch(Exception e)
-        {
-            PersistenceManager.rollbackTransaction(entityManager);
-            e.printStackTrace();
-            return false;
         }
     }
 }

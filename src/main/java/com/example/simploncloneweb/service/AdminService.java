@@ -10,7 +10,12 @@ public class AdminService {
     {
         UseDaoImpl<Admin> useDao = new UseDaoImpl<>(Admin.class);
         AuthDao<Admin> authDao = new AuthDao<>(Admin.class);
-        return authDao.login(username, password);
+        if(username == null || password == null)
+        {
+            return false;
+        }else{
+            return authDao.login(username, password);
+        }
     }
 
 

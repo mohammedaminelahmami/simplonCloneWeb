@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
             }
             case "/home":
             {
-                // check formateur / apprenant
+                // check { formateur / apprenant }
                 if(session.getAttribute("role") == null)
                 {
                     String username = req.getParameter("username");

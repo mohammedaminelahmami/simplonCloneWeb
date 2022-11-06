@@ -3,12 +3,13 @@ package com.example.simploncloneweb.controller;
 import com.example.simploncloneweb.Entity.Admin;
 import com.example.simploncloneweb.service.AdminService;
 import com.example.simploncloneweb.service.ApprenantService;
+import com.example.simploncloneweb.service.FormateurService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-@WebServlet({"/admin/login", "/dashboard", "/admin/addApprenant", "/admin/logout"})
+@WebServlet({"/admin/login", "/dashboard", "/admin/addApprenant","/admin/addFormateur", "/admin/logout"})
 public class AdminController extends HttpServlet {
     HttpSession session;
     @Override
@@ -66,7 +67,33 @@ public class AdminController extends HttpServlet {
                     String nom = req.getParameter("nom");
                     String prenom = req.getParameter("prenom");
 
-                    if(ApprenantService.addAccount(username, password, email, nom, prenom))
+                    boolean checkNull = username != null && password != null && email != null && nom != null && prenom != null;
+
+                    if(ApprenantService.addAccount(username, password, email, nom, prenom) && checkNull)
+                    {
+                        resp.sendRedirect("/dashboard");
+                    }else{
+                        System.out.println("Error !!");
+                        resp.sendRedirect("/dashboard");
+                    }
+                    return;
+                }
+                resp.sendRedirect("admin/login");
+                break;
+            }
+            case "/admin/addFormateur":
+            {
+                if(session.getAttribute("admin") != null)
+                {
+                    String username = req.getParameter("usernameF");
+                    String password = req.getParameter("passwordF");
+                    String email = req.getParameter("emailF");
+                    String nom = req.getParameter("nomF");
+                    String prenom = req.getParameter("prenomF");
+
+                    boolean checkNull = username != null && password != null && email != null && nom != null && prenom != null;
+
+                    if(FormateurService.addAccount(username, password, email, nom, prenom) && checkNull)
                     {
                         resp.sendRedirect("/dashboard");
                     }else{

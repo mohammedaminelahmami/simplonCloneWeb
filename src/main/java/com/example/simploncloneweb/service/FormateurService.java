@@ -9,8 +9,6 @@ public class FormateurService {
     final static UseDaoImpl<Formateur> useDao = new UseDaoImpl<>(Formateur.class);
     final static Formateur formateur = new Formateur();
 
-    // login ...
-
     public static boolean addAccount(String username, String password, String email, String nom, String prenom)
     {
         // Regex

@@ -24,6 +24,8 @@ public class AuthDao<T> {
             PersistenceManager.rollbackTransaction(entityManager);
             e.printStackTrace();
             return false;
+        }finally {
+            entityManager.close();
         }
     }
 
@@ -44,6 +46,8 @@ public class AuthDao<T> {
             PersistenceManager.rollbackTransaction(entityManager);
             e.printStackTrace();
             return false;
+        }finally {
+            entityManager.close();
         }
     }
 }

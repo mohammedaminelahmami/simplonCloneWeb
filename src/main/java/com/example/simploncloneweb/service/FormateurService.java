@@ -1,8 +1,11 @@
 package com.example.simploncloneweb.service;
 
+import com.example.simploncloneweb.Entity.Apprenant;
 import com.example.simploncloneweb.Entity.Formateur;
 import com.example.simploncloneweb.dao.UseDaoImpl;
 import com.example.simploncloneweb.helper.Regex;
+
+import java.util.List;
 
 public class FormateurService {
 
@@ -12,11 +15,11 @@ public class FormateurService {
     public static boolean addAccount(String username, String password, String email, String nom, String prenom)
     {
         // Regex
-        boolean checkUsername = Regex.checkRegex("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" ,username);
-        boolean checkPassword = Regex.checkRegex("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" ,password);
-        boolean checkEmail = Regex.checkRegex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ,email);
-        boolean checkNom = Regex.checkRegex("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" ,nom);
-        boolean checkPrenom = Regex.checkRegex("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" ,prenom);
+//        boolean checkUsername = Regex.checkRegex("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" ,username);
+//        boolean checkPassword = Regex.checkRegex("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" ,password);
+//        boolean checkEmail = Regex.checkRegex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ,email);
+//        boolean checkNom = Regex.checkRegex("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" ,nom);
+//        boolean checkPrenom = Regex.checkRegex("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" ,prenom);
 
         String msgError = "";
 
@@ -26,10 +29,10 @@ public class FormateurService {
             msgError = "Required field";
         }
 
-        if(checkUsername && checkPassword && checkEmail && checkNom && checkPrenom)
-        {
-            msgError = "please enter correct fields";
-        }
+//        if(checkUsername && checkPassword && checkEmail && checkNom && checkPrenom)
+//        {
+//            msgError = "please enter correct fields";
+//        }
 
         if(msgError.equals(""))
         {
@@ -44,5 +47,11 @@ public class FormateurService {
             System.out.println(msgError);
             return false;
         }
+    }
+
+    public static List<Formateur> getAllFormateur()
+    {
+        // List "Formateur"
+        return useDao.getAll();
     }
 }

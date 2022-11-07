@@ -1,6 +1,8 @@
 package com.example.simploncloneweb.controller;
 
 import com.example.simploncloneweb.Entity.Admin;
+import com.example.simploncloneweb.Entity.Apprenant;
+import com.example.simploncloneweb.Entity.Formateur;
 import com.example.simploncloneweb.service.AdminService;
 import com.example.simploncloneweb.service.ApprenantService;
 import com.example.simploncloneweb.service.FormateurService;
@@ -9,7 +11,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-@WebServlet({"/admin/login", "/dashboard", "/admin/addApprenant","/admin/addFormateur", "/admin/logout"})
+import java.util.List;
+
+@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addApprenant", "/admin/addFormateur", "/admin/logout"})
 public class AdminController extends HttpServlet {
     HttpSession session;
     @Override
@@ -57,6 +61,24 @@ public class AdminController extends HttpServlet {
                 }
                 break;
             }
+            case "/admin/users":
+            {
+                if(session.getAttribute("admin") != null)
+                {
+                    // getAll "apprenant"
+                    List<Apprenant> listApprenant = ApprenantService.getAllApprenant();
+                    req.setAttribute("listApprenant", listApprenant);
+
+                    // getAll "formateur"
+                    List<Formateur> listFormateur = FormateurService.getAllFormateur();
+                    req.setAttribute("listFormateur", listFormateur);
+
+                    req.getRequestDispatcher("../Admin/adminUsers.jsp").forward(req, resp);
+                    return;
+                }
+                resp.sendRedirect("/admin/login");
+                break;
+            }
             case "/admin/addApprenant":
             {
                 if(session.getAttribute("admin") != null)
@@ -73,7 +95,6 @@ public class AdminController extends HttpServlet {
                     {
                         resp.sendRedirect("/dashboard");
                     }else{
-                        System.out.println("Error !!");
                         resp.sendRedirect("/dashboard");
                     }
                     return;

@@ -13,7 +13,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addApprenant", "/admin/addFormateur", "/admin/logout"})
+@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addApprenant", "/admin/addFormateur", "/admin/edit", "/admin/logout"})
 public class AdminController extends HttpServlet {
     HttpSession session;
     @Override
@@ -124,6 +124,35 @@ public class AdminController extends HttpServlet {
                     return;
                 }
                 resp.sendRedirect("admin/login");
+                break;
+            }
+            case "/admin/edit":
+            {
+                String getId = req.getParameter("id");
+
+                String nom = req.getParameter("nom");
+                String prenom = req.getParameter("prenom");
+                String email = req.getParameter("email");
+                String username = req.getParameter("username");
+                String password = req.getParameter("password");
+
+                if(req.getParameter("action").equals("apprenant"))
+                {
+                    if(ApprenantService.updateApprenant(Integer.parseInt(getId), nom, prenom, email, username, password))
+                    {
+                        resp.sendRedirect("/admin/users");
+                        return;
+                    }
+                    resp.sendRedirect("/admin/users");
+                }else if(req.getParameter("action").equals("formateur"))
+                {
+                    if(FormateurService.updateFormateur(Integer.parseInt(getId), nom, prenom, email, username, password))
+                    {
+                        resp.sendRedirect("/admin/users");
+                        return;
+                    }
+                    resp.sendRedirect("/admin/users");
+                }
                 break;
             }
             case "/admin/logout":

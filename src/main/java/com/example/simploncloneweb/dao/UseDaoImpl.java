@@ -29,9 +29,9 @@ public class UseDaoImpl<T> implements UseDao<T> {
             entityManager.close();
         }
     }
-    // ???????????????????
+
     @Override
-    public boolean update(int id, T entityObj) {
+    public boolean update(T entityObj) {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try {
             entityManager.merge(entityObj);

@@ -97,8 +97,58 @@
                                     Promo
                                 </td>
                                 <td class="flex justify-center gap-8 py-4 px-6">
-                                    <button type="button" class=""><jsp:include page="../svg/edit.jsp"/></button>
-                                    <button type="button"><jsp:include page="../svg/delete.jsp"/></button>
+                                    <button type="button" data-modal-toggle="<%=formateur.getId()%>"><jsp:include page="../svg/edit.jsp"/></button> <!-- Edit -->
+                                    <button type="button"><jsp:include page="../svg/delete.jsp"/></button> <!-- Delete -->
+
+                                    <!-- ThisModal -->
+                                    <%--EditModal--%>
+                                    <div id="<%=formateur.getId()%>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
+                                        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                                            <!-- Modal content -->
+                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                <button data-modal-toggle="<%=formateur.getId()%>" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
+                                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                                <div class="py-6 px-6 lg:px-8">
+                                                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Edit</h3>
+                                                    <form class="space-y-6" action="/admin/edit" method="post">
+                                                        <div>
+                                                            <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom</label>
+                                                            <input type="text" name="nom" value="<%=formateur.getNom()%>" placeholder="Nom" id="nome" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                                                        </div>
+                                                        <div>
+                                                            <label for="prnom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Prenom</label>
+                                                            <input type="text" name="prenom" value="<%=formateur.getPrenom()%>" placeholder="Prenom" id="prnom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                                                        </div>
+                                                        <div>
+                                                            <label for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+                                                            <input type="email" name="email" value="<%=formateur.getEmail()%>" placeholder="name@company.com" id="Email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                                                        </div>
+                                                        <div>
+                                                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
+                                                            <input type="text" name="username" value="<%=formateur.getUsername()%>" placeholder="Username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                                                        </div>
+                                                        <div>
+                                                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mot de passe</label>
+                                                            <input type="password" name="password" value="<%=formateur.getPassword()%>" placeholder="Mot de passe" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                                                        </div>
+                                                        <div class="hidden">
+                                                            <label>
+                                                                <input type="hidden" name="id" value="<%=formateur.getId()%>">
+                                                                <input type="hidden" name="action" value="formateur">
+                                                            </label>
+                                                        </div>
+                                                        <div class="flex justify-between">
+                                                            <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Modifier</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%--EditModal--%>
+                                    <!-- ThisModal -->
                                 </td>
                             </tr>
                         <%
@@ -150,8 +200,59 @@
                                     Promo
                                 </td>
                                 <td class="flex justify-center gap-8 py-4 px-6">
-                                    <button type="button" class=""><jsp:include page="../svg/edit.jsp"/></button>
-                                    <button type="button"><jsp:include page="../svg/delete.jsp"/></button>
+
+                                    <button type="button" data-modal-toggle=<%=apprenant.getId()%>><jsp:include page="../svg/edit.jsp"/></button> <!-- Edit -->
+                                    <button type="button"><jsp:include page="../svg/delete.jsp"/></button> <!-- Delete -->
+
+                                    <!-- ThisModal -->
+                                        <%--EditModal--%>
+                                        <div id="<%=apprenant.getId()%>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
+                                            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                                                <!-- Modal content -->
+                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                    <button data-modal-toggle="<%=apprenant.getId()%>" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
+                                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                    <div class="py-6 px-6 lg:px-8">
+                                                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Edit</h3>
+                                                        <form class="space-y-6" action="/admin/edit" method="post">
+                                                            <div>
+                                                                <label for="nomeE" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom</label>
+                                                                <input type="text" name="nom" value="<%=apprenant.getNom()%>" placeholder="Nom" id="nomee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                                                            </div>
+                                                            <div>
+                                                                <label for="prnomE" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Prenom</label>
+                                                                <input type="text" name="prenom" value="<%=apprenant.getPrenom()%>" placeholder="Prenom" id="prnomE" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                                                            </div>
+                                                            <div>
+                                                                <label for="EmailE" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+                                                                <input type="email" name="email" value="<%=apprenant.getEmail()%>" placeholder="name@company.com" id="EmailE" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                                                            </div>
+                                                            <div>
+                                                                <label for="usernameE" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
+                                                                <input type="text" name="username" value="<%=apprenant.getUsername()%>" placeholder="Username" id="usernameE" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                                                            </div>
+                                                            <div>
+                                                                <label for="passwordE" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mot de passe</label>
+                                                                <input type="password" name="password" value="<%=apprenant.getPassword()%>" placeholder="Mot de passe" id="passwordE" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                                                            </div>
+                                                            <div class="hidden">
+                                                                <label>
+                                                                    <input type="hidden" name="id" value="<%=apprenant.getId()%>">
+                                                                    <input type="hidden" name="action" value="apprenant">
+                                                                </label>
+                                                            </div>
+                                                            <div class="flex justify-between">
+                                                                <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Modifier</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%--EditModal--%>
+                                    <!-- ThisModal -->
                                 </td>
                             </tr>
                         <%
@@ -205,78 +306,77 @@
     </div>
 </div>
 
-        <!-- formateurModal -->
-        <div id="formateurModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
-            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="formateurModal">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                    <div class="py-6 px-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter formateur</h3>
-                        <form class="space-y-6" action="/admin/addFormateur" method="POST">
-                            <div>
-                                <label for="nomF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom</label>
-                                <input type="text" name="nomF" id="nomF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nom" required="">
-                            </div>
-                            <div>
-                                <label for="prenomF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Prenom</label>
-                                <input type="text" name="prenomF" id="prenomF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Prenom" required="">
-                            </div>
-                            <div>
-                                <label for="emailF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-                                <input type="email" name="emailF" id="emailF" placeholder="name@company.com" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
-                            </div>
-                            <div>
-                                <label for="usernameF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
-                                <input type="text" name="usernameF" id="usernameF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Username" required="">
-                            </div>
-                            <div>
-                                <label for="passwordF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mot de passe</label>
-                                <input type="password" name="passwordF" id="passwordF" placeholder="Mot de passe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
-                            </div>
-                            <div class="flex justify-between">
-                                <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter</button>
-                            </div>
-                        </form>
+<!-- formateurModal -->
+<div id="formateurModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="formateurModal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="py-6 px-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter formateur</h3>
+                <form class="space-y-6" action="/admin/addFormateur" method="POST">
+                    <div>
+                        <label for="nomF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom</label>
+                        <input type="text" name="nomF" id="nomF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nom" required="">
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- promoModal -->
-        <div id="promoModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
-            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="promoModal">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                    <div class="py-6 px-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter promo</h3>
-                        <form class="space-y-6" action="#">
-                            <div>
-                                <label for="Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
-                                <input type="text" name="name" id="Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Name" required="">
-                            </div>
-
-                            <div>
-                                <label for="annee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Annee</label>
-                                <input type="number" name="annee" id="annee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Annee" required="">
-                            </div>
-                            <div class="flex justify-between">
-                                <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter</button>
-                            </div>
-                        </form>
+                    <div>
+                        <label for="prenomF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Prenom</label>
+                        <input type="text" name="prenomF" id="prenomF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Prenom" required="">
                     </div>
-                </div>
+                    <div>
+                        <label for="emailF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+                        <input type="email" name="emailF" id="emailF" placeholder="name@company.com" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                    </div>
+                    <div>
+                        <label for="usernameF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
+                        <input type="text" name="usernameF" id="usernameF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Username" required="">
+                    </div>
+                    <div>
+                        <label for="passwordF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mot de passe</label>
+                        <input type="password" name="passwordF" id="passwordF" placeholder="Mot de passe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                    </div>
+                    <div class="flex justify-between">
+                        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<!-- promoModal -->
+<div id="promoModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="promoModal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="py-6 px-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter promo</h3>
+                <form class="space-y-6" action="#">
+                    <div>
+                        <label for="Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
+                        <input type="text" name="name" id="Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Name" required="">
+                    </div>
+
+                    <div>
+                        <label for="annee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Annee</label>
+                        <input type="number" name="annee" id="annee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Annee" required="">
+                    </div>
+                    <div class="flex justify-between">
+                        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 </body>

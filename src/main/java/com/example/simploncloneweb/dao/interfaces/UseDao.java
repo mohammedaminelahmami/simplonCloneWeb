@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface UseDao<T> {
     boolean save(T entityObj);
-    boolean update(int id, T entityObj);
+    boolean update(T entityObj);
     boolean delete(int id);
     T findById(int id);
     List<T> getAll();

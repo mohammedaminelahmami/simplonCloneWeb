@@ -1,6 +1,9 @@
 package com.example.simploncloneweb.controller;
 
+import com.example.simploncloneweb.Entity.Apprenant;
 import com.example.simploncloneweb.Entity.Brief;
+import com.example.simploncloneweb.helper.Email;
+import com.example.simploncloneweb.service.ApprenantService;
 import com.example.simploncloneweb.service.BriefService;
 import com.example.simploncloneweb.service.FormateurService;
 import jakarta.servlet.ServletException;
@@ -90,9 +93,14 @@ public class FormateurController extends HttpServlet {
 
                 if(BriefService.lanceBrief(Integer.parseInt(idBrief)))
                 {
+                    // Email
+                    int idPromo = (int) session.getAttribute("idPromo");
+                    List<Apprenant> getAllApprenantPromo = ApprenantService.getAllApprenantAssignedToTHisPromo(idPromo);
+                    for(Apprenant apprenant : getAllApprenantPromo)
+                    {
+                         Email.sendEmail(apprenant.getEmail(), "New Brief", "bla bla bla test");
+                    }
                     resp.sendRedirect("/formateur/briefs");
-                    // email
-                    // ---------
                     return;
                 }
                 System.out.println("errorLancerBrief");

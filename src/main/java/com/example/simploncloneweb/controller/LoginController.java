@@ -70,6 +70,7 @@ public class LoginController extends HttpServlet {
                         String usernameApprenant = (String) session.getAttribute("username");
                         // getIdPromo
                         int idPromo = ApprenantService.getIdApprenant(usernameApprenant);
+                        session.setAttribute("idPromo", idPromo);
                         // getAllBriefs
 
                          List<Brief> briefs = BriefService.getAllBriefsPromoFalse(idPromo);

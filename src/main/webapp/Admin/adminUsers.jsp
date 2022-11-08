@@ -276,7 +276,7 @@
             </button>
             <div class="py-6 px-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter apprenant</h3>
-                <form class="space-y-6" action="/admin/addApprenant" method="post">
+                <form class="space-y-6" action="/admin/addAccount" method="post">
                     <div>
                         <label for="nomApprenant" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom</label>
                         <input type="text" name="nom" id="nomApprenant" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nom" required="">
@@ -296,6 +296,11 @@
                     <div>
                         <label for="passwordApprenant" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mot de passe</label>
                         <input type="password" name="password" id="passwordApprenant" placeholder="Mot de passe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                    </div>
+                    <div class="hidden">
+                        <label>
+                            <input type="hidden" name="action" value="apprenant">
+                        </label>
                     </div>
                     <div class="flex justify-between">
                         <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter</button>
@@ -317,26 +322,31 @@
             </button>
             <div class="py-6 px-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter formateur</h3>
-                <form class="space-y-6" action="/admin/addFormateur" method="POST">
+                <form class="space-y-6" action="/admin/addAccount" method="POST">
                     <div>
-                        <label for="nomF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom</label>
-                        <input type="text" name="nomF" id="nomF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nom" required="">
+                        <label for="nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom</label>
+                        <input type="text" name="nom" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nom" required="">
                     </div>
                     <div>
-                        <label for="prenomF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Prenom</label>
-                        <input type="text" name="prenomF" id="prenomF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Prenom" required="">
+                        <label for="prenom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Prenom</label>
+                        <input type="text" name="prenom" id="prenom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Prenom" required="">
                     </div>
                     <div>
-                        <label for="emailF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-                        <input type="email" name="emailF" id="emailF" placeholder="name@company.com" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+                        <input type="email" name="email" id="emailF" placeholder="name@company.com" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
                     </div>
                     <div>
-                        <label for="usernameF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
-                        <input type="text" name="usernameF" id="usernameF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Username" required="">
+                        <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
+                        <input type="text" name="username" id="usernameF" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Username" required="">
                     </div>
                     <div>
-                        <label for="passwordF" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mot de passe</label>
-                        <input type="password" name="passwordF" id="passwordF" placeholder="Mot de passe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mot de passe</label>
+                        <input type="password" name="password" id="passwordF" placeholder="Mot de passe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                    </div>
+                    <div class="hidden">
+                        <label>
+                            <input type="hidden" name="action" value="formateur">
+                        </label>
                     </div>
                     <div class="flex justify-between">
                         <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter</button>

@@ -13,7 +13,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addApprenant", "/admin/addFormateur", "/admin/edit", "/admin/logout"})
+@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addAccount", "/admin/edit", "/admin/logout"})
 public class AdminController extends HttpServlet {
     HttpSession session;
     @Override
@@ -79,7 +79,7 @@ public class AdminController extends HttpServlet {
                 resp.sendRedirect("/admin/login");
                 break;
             }
-            case "/admin/addApprenant":
+            case "/admin/addAccount":
             {
                 if(session.getAttribute("admin") != null)
                 {
@@ -88,38 +88,21 @@ public class AdminController extends HttpServlet {
                     String email = req.getParameter("email");
                     String nom = req.getParameter("nom");
                     String prenom = req.getParameter("prenom");
-
                     boolean checkNull = username != null && password != null && email != null && nom != null && prenom != null;
 
-                    if(ApprenantService.addAccount(username, password, email, nom, prenom) && checkNull)
-                    {
-                        resp.sendRedirect("/dashboard");
-                    }else{
-                        resp.sendRedirect("/dashboard");
+                    boolean account = false;
+                    if (req.getParameter("action").equals("apprenant")) {
+                        account = ApprenantService.addAccount(username, password, email, nom, prenom) && checkNull;
+                    } else if(req.getParameter("action").equals("formateur")){
+                        account = FormateurService.addAccount(username, password, email, nom, prenom) && checkNull;
                     }
-                    return;
-                }
-                resp.sendRedirect("admin/login");
-                break;
-            }
-            case "/admin/addFormateur":
-            {
-                if(session.getAttribute("admin") != null)
-                {
-                    String username = req.getParameter("usernameF");
-                    String password = req.getParameter("passwordF");
-                    String email = req.getParameter("emailF");
-                    String nom = req.getParameter("nomF");
-                    String prenom = req.getParameter("prenomF");
 
-                    boolean checkNull = username != null && password != null && email != null && nom != null && prenom != null;
-
-                    if(FormateurService.addAccount(username, password, email, nom, prenom) && checkNull)
+                    if(account)
                     {
-                        resp.sendRedirect("/dashboard");
+                        resp.sendRedirect("/admin/users");
                     }else{
                         System.out.println("Error !!");
-                        resp.sendRedirect("/dashboard");
+                        resp.sendRedirect("/admin/users");
                     }
                     return;
                 }

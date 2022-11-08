@@ -19,7 +19,7 @@ public class Email {
         props.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
 
         String adminEmail = "lahmamimohammedamine@gmail.com";
-        String adminPassword = "***********";
+        String adminPassword = "**************";
 
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
@@ -30,7 +30,7 @@ public class Email {
         Message message = prepareMessage(session, adminEmail, recipient, name, description);
         try {
             Transport transport = session.getTransport("smtp");
-            transport.connect("lahmamimohammedamine@gmail.com", "*************");
+            transport.connect("lahmamimohammedamine@gmail.com", "**************");
             // Send message
             transport.sendMessage(message, message.getAllRecipients());
             System.out.println("Sent message successfully....");
@@ -48,16 +48,16 @@ public class Email {
             message.setFrom(new InternetAddress(adminEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
             // Set Subject: header field
-            message.setSubject("New breif");
+            message.setSubject("New brief");
             // Send the actual HTML message, as big as you like
             message.setContent(
-                    "<div style=\"background-color: orange;\">\n" +
+                    "<div style=\"background-color: #dc2626;\">\n" +
                             "    <h1 style=\"text-align: center;color: white;padding-top: 10px;padding-bottom: 10px;\">"+name+"</h1>\n" +
-                            "    <hr style=\"margin:auto; width:50%;background-color:white;border: 1px solid white;margin-bottom: 10px;\">\n" +
+                            "    <hr style=\"margin:auto; width:30%;background-color:white;border: 1px solid white;margin-bottom: 10px;\">\n" +
                             "    <p style=\"margin:auto;color: white;width: 80%;padding-bottom: 20px;\">\n"+ description +"\n" +
                             "        <br>\n" +
                             "        <br>\n" +
-                            "        <a href=\"http://localhost:8085/former/login\">http://localhost:8085/former/login</a>\n" +
+                            "        <a style=\"color: white; text-decoration: none;padding: 4px;text-size: 8px;border: 2; border-style: solid; border-radius: 6px;\" href=\"http://localhost:8080/login\">Simplon</a>\n" +
                             "    </p>\n" +
                             "</div>",
                     "text/html"

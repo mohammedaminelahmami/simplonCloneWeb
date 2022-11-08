@@ -16,7 +16,6 @@ import java.util.List;
 @WebServlet({"/login", "/home", "/logout"})
 public class LoginController extends HttpServlet {
     HttpSession session;
-    boolean drop = true;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         session = req.getSession();
@@ -79,58 +78,39 @@ public class LoginController extends HttpServlet {
                         req.getRequestDispatcher("./Apprenant/home.jsp").forward(req, resp);
                     }else if(session.getAttribute("role") == "formateur")
                     {
-                        if(drop)
-                        {
-                            System.out.println("if");
-                            // redirect to "formateur" Home;
-                            // getAll "apprenant"
+                        System.out.println("if");
+                        // redirect to "formateur" Home;
+                        // getAll "apprenant"
 //                        List<Apprenant> listApprenant = ApprenantService.getAllApprenant();
 //                        req.setAttribute("listApprenant", listApprenant);
 
-                            String usernameFromSession = (String) session.getAttribute("username");
+                        String usernameFromSession = (String) session.getAttribute("username");
 
-                            // getIdPromo
-                            int getPromoId = FormateurService.getIdPromo(usernameFromSession);
-                            session.setAttribute("idPromo", getPromoId);
+                        // getIdPromo
+                        int getPromoId = FormateurService.getIdPromo(usernameFromSession);
+                        session.setAttribute("idPromo", getPromoId);
 
-                            // getPromoName
-                            String promoName = PromotionService.getPromoName(getPromoId);
-                            session.setAttribute("promoName", promoName);
+                        // getPromoName
+                        String promoName = PromotionService.getPromoName(getPromoId);
+                        session.setAttribute("promoName", promoName);
 
-                            // getAllApprenantAssignedToTHisPromo
-                            List<Apprenant> listApprenantAssigned = ApprenantService.getAllApprenantAssignedToTHisPromo(getPromoId);
-                            session.setAttribute("listApprenantAssigned", listApprenantAssigned);
+                        // getAllApprenantAssignedToTHisPromo
+                        List<Apprenant> listApprenantAssigned = ApprenantService.getAllApprenantAssignedToTHisPromo(getPromoId);
+                        session.setAttribute("listApprenantAssigned", listApprenantAssigned);
 
-                            // getAllApprenantNotAssignedToAnyPromo
-                            List<Apprenant> listApprenantNotAssigned = ApprenantService.getAllApprenantNotAssignedToAnyPromo();
-                            session.setAttribute("listApprenantNotAssigned", listApprenantNotAssigned);
+                        // getAllApprenantNotAssignedToAnyPromo
+                        List<Apprenant> listApprenantNotAssigned = ApprenantService.getAllApprenantNotAssignedToAnyPromo();
+                        session.setAttribute("listApprenantNotAssigned", listApprenantNotAssigned);
 
-                            req.getRequestDispatcher("./Formateur/home.jsp").include(req, resp);
-                            drop = false;
-                        }else{
-                            System.out.println("else");
-                            // getAllApprenantAssignedToTHisPromo
-                            String usernameFromSession = (String) session.getAttribute("username");
-                            int getPromoId = FormateurService.getIdPromo(usernameFromSession);
-
-                            List<Apprenant> listApprenantAssigned = ApprenantService.getAllApprenantAssignedToTHisPromo(getPromoId);
-                            session.setAttribute("listApprenantAssigned", listApprenantAssigned);
-
-                            // getAllApprenantNotAssignedToAnyPromo
-                            List<Apprenant> listApprenantNotAssigned = ApprenantService.getAllApprenantNotAssignedToAnyPromo();
-                            session.setAttribute("listApprenantNotAssigned", listApprenantNotAssigned);
-
-                            req.getRequestDispatcher("./Formateur/home.jsp").include(req, resp);
-                        }
+                        req.getRequestDispatcher("./Formateur/home.jsp").include(req, resp);
                     }
                 }
                 break;
             }
             case "/logout":
             {
-                session.removeAttribute("role");
                 session.invalidate();
-                resp.sendRedirect("/home");
+                resp.sendRedirect("/login");
                 break;
             }
         }

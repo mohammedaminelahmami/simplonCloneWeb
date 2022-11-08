@@ -1,7 +1,7 @@
 <%@ page import="com.example.simploncloneweb.Entity.Apprenant" %>
 <%@ page import="java.util.List" %>
 <jsp:include page="../components/header.jsp"/>
-<jsp:include page="../components/navbar.jsp"/>
+<jsp:include page="../components/formateurComponents/navbar.jsp"/>
 
 <%--| Apprenant |--%>
 <div class="flex flex-col gap-20 w-full bg-[#f0f0f0]">
@@ -127,7 +127,6 @@
     </div>
 </div>
 
-<!--<div class="mt-5">
-    <jsp:include page="../components/footer.jsp"/>
-</div>
--->
+<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+</body>
+</html>

@@ -65,11 +65,16 @@ public class FormateurController extends HttpServlet {
             case "/formateur/briefs":
             {
                 int idPromo = (int) session.getAttribute("idPromo");
+                System.out.println(idPromo);
+                try{
+                    List<Brief> briefs = BriefService.getAllBriefsPromoAll(idPromo);
+                    req.setAttribute("briefs", briefs);
 
-                List<Brief> briefs = BriefService.getAllBriefsPromoAll(idPromo);
-                req.setAttribute("briefs", briefs);
-
-                req.getRequestDispatcher("../Formateur/briefs.jsp").forward(req, resp);
+                    req.getRequestDispatcher("../Formateur/briefs.jsp").forward(req, resp);
+                }catch (Exception e)
+                {
+                    System.out.println(" error /formateur/briefs "+e.getMessage());
+                }
                 break;
             }
             case "/formateur/addBrief":
@@ -98,7 +103,7 @@ public class FormateurController extends HttpServlet {
                     List<Apprenant> getAllApprenantPromo = ApprenantService.getAllApprenantAssignedToTHisPromo(idPromo);
                     for(Apprenant apprenant : getAllApprenantPromo)
                     {
-                         Email.sendEmail(apprenant.getEmail(), "New Brief", "bla bla bla test");
+                         Email.sendEmail(apprenant.getEmail(), "New Brief has been Created !", "");
                     }
                     resp.sendRedirect("/formateur/briefs");
                     return;

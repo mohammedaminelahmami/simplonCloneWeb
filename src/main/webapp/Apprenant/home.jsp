@@ -1,5 +1,5 @@
 <jsp:include page="../components/header.jsp"/>
-<jsp:include page="../components/navbar.jsp"/>
+<jsp:include page="../components/apprenantComponents/navbar.jsp"/>
 
 <form action="${pageContext.request.contextPath}/logout" method="post">
     <button type="submit" style="display: none">Logout</button>

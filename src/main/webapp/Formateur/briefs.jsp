@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.simploncloneweb.Entity.Brief" %>
 <jsp:include page="../components/header.jsp"/>
-<jsp:include page="../components/navbar.jsp"/>
+<jsp:include page="../components/formateurComponents/navbar.jsp"/>
 
 <%
     String promoName = (String) session.getAttribute("promoName");
@@ -80,7 +80,7 @@
                                                         <span class="sr-only">Close modal</span>
                                                     </button>
                                                     <div class="py-6 px-6 lg:px-8">
-                                                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter un nouveau brief</h3>
+                                                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Modifier le brief</h3>
                                                         <form class="space-y-6" action="/formateur/updateBrief" method="POST">
                                                             <div>
                                                                 <label for="updateContext" class="block mb-2 text-sm font-medium text-gray-900">Context</label>

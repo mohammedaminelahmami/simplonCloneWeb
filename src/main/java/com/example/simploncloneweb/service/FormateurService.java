@@ -1,9 +1,7 @@
 package com.example.simploncloneweb.service;
 
-import com.example.simploncloneweb.Entity.Apprenant;
 import com.example.simploncloneweb.Entity.Formateur;
 import com.example.simploncloneweb.dao.UseDaoImpl;
-import com.example.simploncloneweb.helper.Regex;
 
 import java.util.List;
 
@@ -98,5 +96,10 @@ public class FormateurService {
         }else{
             return false;
         }
+    }
+
+    public static boolean deleteAccount(int id)
+    {
+        return useDao.delete(id);
     }
 }

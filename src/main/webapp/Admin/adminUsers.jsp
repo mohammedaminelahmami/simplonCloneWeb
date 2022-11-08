@@ -98,7 +98,14 @@
                                 </td>
                                 <td class="flex justify-center gap-8 py-4 px-6">
                                     <button type="button" data-modal-toggle="<%=formateur.getId()%>"><jsp:include page="../svg/edit.jsp"/></button> <!-- Edit -->
-                                    <button type="button"><jsp:include page="../svg/delete.jsp"/></button> <!-- Delete -->
+
+                                    <form action="/admin/delete" method="POST">
+                                        <label>
+                                            <input type="hidden" name="action" value="formateur">
+                                            <input type="hidden" name="id" value="<%=formateur.getId()%>">
+                                        </label>
+                                        <button type="submit"><jsp:include page="../svg/delete.jsp"/></button> <!-- Delete -->
+                                    </form>
 
                                     <!-- ThisModal -->
                                     <%--EditModal--%>
@@ -202,8 +209,14 @@
                                 <td class="flex justify-center gap-8 py-4 px-6">
 
                                     <button type="button" data-modal-toggle=<%=apprenant.getId()%>><jsp:include page="../svg/edit.jsp"/></button> <!-- Edit -->
-                                    <button type="button"><jsp:include page="../svg/delete.jsp"/></button> <!-- Delete -->
 
+                                    <form action="/admin/delete" method="POST">
+                                        <label>
+                                            <input type="hidden" name="action" value="apprenant">
+                                            <input type="hidden" name="id" value="<%=apprenant.getId()%>">
+                                        </label>
+                                        <button type="submit"><jsp:include page="../svg/delete.jsp"/></button> <!-- Delete -->
+                                    </form>
                                     <!-- ThisModal -->
                                         <%--EditModal--%>
                                         <div id="<%=apprenant.getId()%>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">

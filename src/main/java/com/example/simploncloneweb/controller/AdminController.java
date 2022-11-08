@@ -13,7 +13,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addAccount", "/admin/edit", "/admin/logout"})
+@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addAccount", "/admin/edit", "/admin/delete", "/admin/logout"})
 public class AdminController extends HttpServlet {
     HttpSession session;
     @Override
@@ -136,6 +136,27 @@ public class AdminController extends HttpServlet {
                     }
                     resp.sendRedirect("/admin/users");
                 }
+                break;
+            }
+            case "/admin/delete":
+            {
+                String getId = req.getParameter("id");
+                boolean account = false;
+
+                if(req.getParameter("action").equals("apprenant"))
+                {
+                    account = ApprenantService.deleteAccount(Integer.parseInt(getId));
+                }else if(req.getParameter("action").equals("formateur"))
+                {
+                    account = FormateurService.deleteAccount(Integer.parseInt(getId));
+                }
+                if(account)
+                {
+                    resp.sendRedirect("/admin/users");
+                    return;
+                }
+                resp.sendRedirect("/admin/users");
+                System.out.println("error");
                 break;
             }
             case "/admin/logout":

@@ -92,6 +92,11 @@ public class ApprenantService {
             return false;
         }
     }
+
+    public static boolean deleteAccount(int id)
+    {
+        return useDao.delete(id);
+    }
 }
 
 

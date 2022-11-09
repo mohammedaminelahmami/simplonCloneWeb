@@ -19,7 +19,6 @@ public class UseDaoImpl<T> implements UseDao<T> {
         try {
             entityManager.persist(entityObj);
             PersistenceManager.commitTransaction(entityManager);
-            entityManager.close();
             return true;
         } catch (Exception e) {
             PersistenceManager.rollbackTransaction(entityManager);
@@ -36,7 +35,6 @@ public class UseDaoImpl<T> implements UseDao<T> {
         try {
             entityManager.merge(entityObj);
             PersistenceManager.commitTransaction(entityManager);
-            entityManager.close();
             return true;
         } catch (Exception e) {
             PersistenceManager.rollbackTransaction(entityManager);
@@ -74,7 +72,6 @@ public class UseDaoImpl<T> implements UseDao<T> {
         try {
             T t = entityManager.find(entityClass, id);
             PersistenceManager.commitTransaction(entityManager);
-            entityManager.close();
             return t;
         } catch (Exception e) {
             PersistenceManager.rollbackTransaction(entityManager);
@@ -91,7 +88,6 @@ public class UseDaoImpl<T> implements UseDao<T> {
         try {
             List<T> list = entityManager.createQuery("SELECT t from "+ entityClass.getSimpleName() + " t", entityClass).getResultList();
             PersistenceManager.commitTransaction(entityManager); // commit
-            entityManager.close();
             return list;
         } catch (Exception e) {
             PersistenceManager.rollbackTransaction(entityManager); // rollback

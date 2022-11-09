@@ -8,7 +8,6 @@ import java.util.List;
 public class ApprenantService {
 
     final static UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
-    final static Apprenant apprenant = new Apprenant();
 
     public static boolean addAccount(String username, String password, String email, String nom, String prenom)
     {
@@ -34,6 +33,8 @@ public class ApprenantService {
 
         if(msgError.equals(""))
         {
+            Apprenant apprenant = new Apprenant();
+
             apprenant.setUsername(username);
             apprenant.setPassword(password);
             apprenant.setEmail(email);

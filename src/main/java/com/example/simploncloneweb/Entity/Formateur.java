@@ -30,7 +30,7 @@ public class Formateur {
     @Basic
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
-    @OneToMany(mappedBy = "idformateur")
+    @OneToMany(mappedBy = "idformateur", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private Collection<Promotion> promotionsById;
 
     public Integer getId() {

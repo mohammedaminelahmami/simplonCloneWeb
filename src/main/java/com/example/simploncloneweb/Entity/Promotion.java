@@ -17,7 +17,7 @@ public class Promotion {
     private Boolean status;
     @Basic
     @Column(name = "annee")
-    private Boolean annee;
+    private int annee;
     @Basic
     @Column(name = "idformateur")
     private Integer idformateur;
@@ -45,12 +45,12 @@ public class Promotion {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-    public Boolean getAnnee() {
-        return status;
+    public int getAnnee() {
+        return annee;
     }
 
-    public void setAnnee(Boolean status) {
-        this.status = status;
+    public void setAnnee(int annee) {
+        this.annee = annee;
     }
 
     public Integer getIdformateur() {

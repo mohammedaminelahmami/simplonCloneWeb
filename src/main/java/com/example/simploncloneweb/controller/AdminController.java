@@ -3,9 +3,11 @@ package com.example.simploncloneweb.controller;
 import com.example.simploncloneweb.Entity.Admin;
 import com.example.simploncloneweb.Entity.Apprenant;
 import com.example.simploncloneweb.Entity.Formateur;
+import com.example.simploncloneweb.Entity.Promotion;
 import com.example.simploncloneweb.service.AdminService;
 import com.example.simploncloneweb.service.ApprenantService;
 import com.example.simploncloneweb.service.FormateurService;
+import com.example.simploncloneweb.service.PromotionService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -13,7 +15,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addAccount", "/admin/edit", "/admin/delete", "/admin/logout"})
+@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addPromo", "/admin/addAccount", "/admin/edit", "/admin/delete", "/admin/logout"})
 public class AdminController extends HttpServlet {
     HttpSession session;
     @Override
@@ -73,10 +75,29 @@ public class AdminController extends HttpServlet {
                     List<Formateur> listFormateur = FormateurService.getAllFormateur();
                     req.setAttribute("listFormateur", listFormateur);
 
+                    //getAll "promos"
+                    List<Promotion> listPromotion = PromotionService.getAllPromotion();
+                    req.setAttribute("listPromotion", listPromotion);
+
                     req.getRequestDispatcher("../Admin/adminUsers.jsp").forward(req, resp);
                     return;
                 }
                 resp.sendRedirect("/admin/login");
+                break;
+            }
+            case "/admin/addPromo":
+            {
+                String name = req.getParameter("name");
+                String annee = req.getParameter("annee");
+                boolean checkNull = name != null && annee != null;
+                assert annee != null;
+                if(PromotionService.addPromo(name, Integer.parseInt(annee)) && checkNull)
+                {
+                    resp.sendRedirect("/admin/users");
+                    return;
+                }
+                System.out.println("error");
+                resp.sendRedirect("/admin/users");
                 break;
             }
             case "/admin/addAccount":
@@ -92,10 +113,17 @@ public class AdminController extends HttpServlet {
 
                     boolean account = false;
                     if (req.getParameter("action").equals("apprenant")) {
+                        //assert username != null;
                         account = ApprenantService.addAccount(username, password, email, nom, prenom) && checkNull;
                     } else if(req.getParameter("action").equals("formateur")){
+                        //assert username != null;
                         account = FormateurService.addAccount(username, password, email, nom, prenom) && checkNull;
                     }
+
+                    System.out.println("---------------------------------------------------------------------------------------");
+                        System.out.println("action =====> "+req.getParameter("action"));
+                        System.out.println("boolean =====> "+account);
+                    System.out.println("---------------------------------------------------------------------------------------");
 
                     if(account)
                     {

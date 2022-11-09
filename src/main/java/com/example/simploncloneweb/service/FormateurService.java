@@ -8,7 +8,6 @@ import java.util.List;
 public class FormateurService {
 
     final static UseDaoImpl<Formateur> useDao = new UseDaoImpl<>(Formateur.class);
-    final static Formateur formateur = new Formateur();
 
     public static boolean addAccount(String username, String password, String email, String nom, String prenom)
     {
@@ -34,6 +33,8 @@ public class FormateurService {
 
         if(msgError.equals(""))
         {
+            Formateur formateur = new Formateur();
+
             formateur.setUsername(username);
             formateur.setPassword(password);
             formateur.setEmail(email);

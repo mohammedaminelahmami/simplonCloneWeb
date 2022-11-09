@@ -15,7 +15,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addPromo", "/admin/addAccount", "/admin/edit", "/admin/delete", "/admin/logout"})
+@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addPromo", "/admin/addAccount", "/admin/edit", "/admin/delete", "/admin/assign", "/admin/logout"})
 public class AdminController extends HttpServlet {
     HttpSession session;
     @Override
@@ -75,9 +75,13 @@ public class AdminController extends HttpServlet {
                     List<Formateur> listFormateur = FormateurService.getAllFormateur();
                     req.setAttribute("listFormateur", listFormateur);
 
-                    //getAll "promos"
+                    // getAll "promos"
                     List<Promotion> listPromotion = PromotionService.getAllPromotion();
                     req.setAttribute("listPromotion", listPromotion);
+
+                    // getAll "promos --> false"
+                    List<Promotion> listPromosFalse = PromotionService.getAllPromotionStatusFalse();
+                    req.setAttribute("listPromosFalse", listPromosFalse);
 
                     req.getRequestDispatcher("../Admin/adminUsers.jsp").forward(req, resp);
                     return;
@@ -119,11 +123,6 @@ public class AdminController extends HttpServlet {
                         //assert username != null;
                         account = FormateurService.addAccount(username, password, email, nom, prenom) && checkNull;
                     }
-
-                    System.out.println("---------------------------------------------------------------------------------------");
-                        System.out.println("action =====> "+req.getParameter("action"));
-                        System.out.println("boolean =====> "+account);
-                    System.out.println("---------------------------------------------------------------------------------------");
 
                     if(account)
                     {
@@ -177,6 +176,9 @@ public class AdminController extends HttpServlet {
                 }else if(req.getParameter("action").equals("formateur"))
                 {
                     account = FormateurService.deleteAccount(Integer.parseInt(getId));
+                }else if(req.getParameter("action").equals("promotion"))
+                {
+                    account = PromotionService.deletePromo(Integer.parseInt(getId));
                 }
                 if(account)
                 {
@@ -184,7 +186,12 @@ public class AdminController extends HttpServlet {
                     return;
                 }
                 resp.sendRedirect("/admin/users");
-                System.out.println("error");
+                System.out.println("errorDelete");
+                break;
+            }
+            case "/admin/assign":
+            {
+                // asign formateur to promo
                 break;
             }
             case "/admin/logout":

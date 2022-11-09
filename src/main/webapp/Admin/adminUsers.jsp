@@ -44,7 +44,7 @@
                         </button>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/admin/logout" style="margin-top: 25.5rem" class=" flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <a href="${pageContext.request.contextPath}/admin/logout" style="margin-top: 20.5rem" class=" flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
                             <span class="flex-1 ml-3 whitespace-nowrap">Se deconnecter</span>
                         </a>
@@ -97,16 +97,21 @@
                                 <td class="py-4 px-6">
                                     Promo
                                 </td>
-                                <td class="flex justify-center gap-8 py-4 px-6">
-                                    <button type="button" data-modal-toggle=<%=formateur.getId()+"formateur"%>><jsp:include page="../svg/edit.jsp"/></button> <!-- Edit -->
+                                <td class="flex justify-center py-4 px-6">
+                                    <div class="flex items-center gap-8">
+                                        <button type="button" data-modal-toggle=<%=formateur.getId()+"assignModal"%> class="p-1 border-2 border-blue-700 rounded-md text-xs font-semibold text-blue-700">
+                                            Affecter
+                                        </button>
+                                        <button type="button" data-modal-toggle=<%=formateur.getId()+"formateur"%>><jsp:include page="../svg/edit.jsp"/></button> <!-- Edit -->
 
-                                    <form action="/admin/delete" method="POST">
-                                        <label>
-                                            <input type="hidden" name="action" value="formateur">
-                                            <input type="hidden" name="id" value="<%=formateur.getId()%>">
-                                        </label>
-                                        <button type="submit"><jsp:include page="../svg/delete.jsp"/></button> <!-- Delete -->
-                                    </form>
+                                        <form action="/admin/delete" method="POST">
+                                            <label>
+                                                <input type="hidden" name="action" value="formateur">
+                                                <input type="hidden" name="id" value="<%=formateur.getId()%>">
+                                            </label>
+                                            <button type="submit"><jsp:include page="../svg/delete.jsp"/></button> <!-- Delete -->
+                                        </form>
+                                    </div>
 
                                     <!-- ThisModal -->
                                     <%--EditModal--%>
@@ -157,6 +162,45 @@
                                     </div>
                                     <%--EditModal--%>
                                     <!-- ThisModal -->
+
+                                    <!-- Modal AssignFormateur -->
+                                    <div id=<%=formateur.getId()+"assignModal"%> tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
+                                        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                                            <!-- Modal content -->
+                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle=<%=formateur.getId()+"assignModal"%>>
+                                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                                <div class="py-6 px-6 lg:px-8">
+                                                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Affecter <%=formateur.getNom()%> dans un promo</h3>
+
+                                                    <%
+                                                        List<Promotion> listPromosFalse = (List<Promotion>) request.getAttribute("listPromosFalse");
+                                                    %>
+                                                    <form action="" method="POST" class="flex justify-center gap-5">
+                                                        <label>
+                                                            <select class="block mb-2 text-sm font-medium text-gray-900 rounded-md">
+                                                                <option disabled>Select Promo</option>
+                                                                <%
+                                                                    for(Promotion promosFalse : listPromosFalse)
+                                                                    {
+                                                                %>
+                                                                <option>
+                                                                    <%=promosFalse.getName()%>
+                                                                </option>
+                                                                <%
+                                                                    }
+                                                                %>
+                                                            </select>
+                                                        </label>
+
+                                                        <button type="submit" class="block mb-2 p-2 text-sm text-blue-700 font-medium border-2 border-blue-700 rounded-md">Affecter</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         <%

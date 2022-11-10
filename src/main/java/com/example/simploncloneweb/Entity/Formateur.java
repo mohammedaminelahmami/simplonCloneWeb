@@ -28,9 +28,12 @@ public class Formateur {
     @Column(name = "prenom")
     private String prenom;
     @Basic
+    @Column(name = "status")
+    private Boolean status;
+    @Basic
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
-    @OneToMany(mappedBy = "idformateur", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "idformateur")
     private Collection<Promotion> promotionsById;
 
     public Integer getId() {
@@ -79,6 +82,13 @@ public class Formateur {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public Timestamp getCreatedAt() {

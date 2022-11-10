@@ -15,7 +15,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addPromo", "/admin/addAccount", "/admin/edit", "/admin/delete", "/admin/assign", "/admin/logout"})
+@WebServlet({"/admin/login", "/dashboard", "/admin/users", "/admin/addPromo", "/admin/addAccount", "/admin/edit", "/admin/delete", "/admin/assign", "/admin/empeche", "/admin/logout"})
 public class AdminController extends HttpServlet {
     HttpSession session;
     @Override
@@ -191,7 +191,29 @@ public class AdminController extends HttpServlet {
             }
             case "/admin/assign":
             {
-                // asign formateur to promo
+                 // assign formateur to promo
+                String idFormateur = req.getParameter("idFormateur");
+                String promoName = req.getParameter("promoName");
+
+                if(PromotionService.assignerFormateur(Integer.parseInt(idFormateur), promoName))
+                {
+                    resp.sendRedirect("/admin/users");
+                    return;
+                }
+                System.out.println("errorAssign");
+                resp.sendRedirect("/admin/users");
+                break;
+            }
+            case "/admin/empeche":
+            {
+                // (!assign) promo from formateur
+                String idFormateur = req.getParameter("idFormateur");
+                if(PromotionService.empecherFormateur(Integer.parseInt(idFormateur)))
+                {
+                    resp.sendRedirect("/admin/users");
+                    return;
+                }
+                resp.sendRedirect("/admin/users");
                 break;
             }
             case "/admin/logout":

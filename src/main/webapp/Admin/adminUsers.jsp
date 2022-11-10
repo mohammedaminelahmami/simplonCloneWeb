@@ -99,9 +99,30 @@
                                 </td>
                                 <td class="flex justify-center py-4 px-6">
                                     <div class="flex items-center gap-8">
-                                        <button type="button" data-modal-toggle=<%=formateur.getId()+"assignModal"%> class="p-1 border-2 border-blue-700 rounded-md text-xs font-semibold text-blue-700">
-                                            Affecter
-                                        </button>
+                                        <%
+                                            if(formateur.getStatus() == null || !formateur.getStatus())
+                                            {
+                                        %>
+                                            <button type="button" data-modal-toggle="<%=formateur.getId()+"assignModal"%>" class="p-1 border-2 border-blue-700 rounded-md text-xs font-semibold text-blue-700">
+                                                Assigner
+                                            </button>
+
+                                            <button type="button" disabled class="p-1 border-2 border-gray-400 rounded-md text-xs font-semibold text-gray-400">Empecher</button>
+                                        <%
+                                            }else if(formateur.getStatus()){
+                                        %>
+                                            <button type="button" disabled class="p-1 border-2 border-gray-400 rounded-md text-xs font-semibold text-gray-400">Assigner</button>
+
+                                            <form action="/admin/empeche" method="POST">
+                                                <input type="hidden" name="idFormateur" value="<%=formateur.getId()%>">
+                                                <button type="submit" class="p-1 border-2 border-blue-700 rounded-md text-xs font-semibold text-blue-700">
+                                                    Empecher
+                                                </button>
+                                            </form>
+                                        <%
+                                            }
+                                        %>
+
                                         <button type="button" data-modal-toggle=<%=formateur.getId()+"formateur"%>><jsp:include page="../svg/edit.jsp"/></button> <!-- Edit -->
 
                                         <form action="/admin/delete" method="POST">
@@ -178,23 +199,24 @@
                                                     <%
                                                         List<Promotion> listPromosFalse = (List<Promotion>) request.getAttribute("listPromosFalse");
                                                     %>
-                                                    <form action="" method="POST" class="flex justify-center gap-5">
+                                                    <form action="/admin/assign" method="POST" class="flex justify-center gap-5">
                                                         <label>
-                                                            <select class="block mb-2 text-sm font-medium text-gray-900 rounded-md">
-                                                                <option disabled>Select Promo</option>
+                                                            <select name="promoName" class="block mb-2 text-sm font-medium text-gray-900 rounded-md">
+                                                                <option selected disabled>Select Promo</option>
                                                                 <%
                                                                     for(Promotion promosFalse : listPromosFalse)
                                                                     {
                                                                 %>
-                                                                <option>
-                                                                    <%=promosFalse.getName()%>
-                                                                </option>
+                                                                        <option>
+                                                                            <%=promosFalse.getName()%>
+                                                                        </option>
                                                                 <%
                                                                     }
                                                                 %>
                                                             </select>
                                                         </label>
 
+                                                        <input type="hidden" name="idFormateur" value="<%=formateur.getId()%>">
                                                         <button type="submit" class="block mb-2 p-2 text-sm text-blue-700 font-medium border-2 border-blue-700 rounded-md">Affecter</button>
                                                     </form>
                                                 </div>

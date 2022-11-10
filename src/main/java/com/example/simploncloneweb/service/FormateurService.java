@@ -1,6 +1,8 @@
 package com.example.simploncloneweb.service;
 
 import com.example.simploncloneweb.Entity.Formateur;
+import com.example.simploncloneweb.Entity.Promotion;
+import com.example.simploncloneweb.dao.PromotionDao;
 import com.example.simploncloneweb.dao.UseDaoImpl;
 
 import java.util.List;
@@ -8,6 +10,8 @@ import java.util.List;
 public class FormateurService {
 
     final static UseDaoImpl<Formateur> useDao = new UseDaoImpl<>(Formateur.class);
+    final static UseDaoImpl<Promotion> useDaoP = new UseDaoImpl<>(Promotion.class);
+    final static PromotionDao pDao = new PromotionDao();
 
     public static boolean addAccount(String username, String password, String email, String nom, String prenom)
     {
@@ -101,6 +105,10 @@ public class FormateurService {
 
     public static boolean deleteAccount(int id)
     {
+        int idPromo = pDao.finIdPromoByIdFormateur(id);
+        Promotion promotion = useDaoP.findById(idPromo);
+        promotion.setStatus(false);
+        useDaoP.update(promotion);
         return useDao.delete(id);
     }
 }

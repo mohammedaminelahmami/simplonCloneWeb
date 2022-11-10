@@ -106,9 +106,14 @@ public class FormateurService {
     public static boolean deleteAccount(int id)
     {
         int idPromo = pDao.finIdPromoByIdFormateur(id);
-        Promotion promotion = useDaoP.findById(idPromo);
-        promotion.setStatus(false);
-        useDaoP.update(promotion);
-        return useDao.delete(id);
+        if(idPromo != -1)
+        {
+            Promotion promotion = useDaoP.findById(idPromo);
+            promotion.setStatus(false);
+            useDaoP.update(promotion);
+            return useDao.delete(id);
+        }else{
+            return useDao.delete(id);
+        }
     }
 }

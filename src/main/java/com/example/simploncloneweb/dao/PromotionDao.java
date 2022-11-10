@@ -125,7 +125,12 @@ public class PromotionDao {
             Query query = entityManager.createQuery("select t from Promotion t WHERE t.id = :idPromo",Promotion.class);
             query.setParameter("idPromo", idPromo);
             Promotion promotion = (Promotion) query.getSingleResult();
-            return promotion.getIdformateur();
+            if(promotion.getIdformateur() == null)
+            {
+                return -1;
+            }else{
+                return promotion.getIdformateur();
+            }
         }catch(Exception e)
         {
             e.printStackTrace();
@@ -144,7 +149,12 @@ public class PromotionDao {
             query.setParameter("idFormateur", idFormateur);
 
             Promotion promotion = (Promotion) query.getSingleResult();
-            return promotion.getId();
+            if(promotion.getId() == null)
+            {
+                return -1;
+            }else {
+                return promotion.getId();
+            }
         }catch(Exception e)
         {
             e.printStackTrace();

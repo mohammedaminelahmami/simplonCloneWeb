@@ -134,4 +134,9 @@ public class FormateurService {
         int idPromo = pDao.findIdPromoByIdFormateur(idFormateur);
         return appDao.updateApprenantPromo(idApprenant, idPromo);
     }
+
+    public static boolean empechApprenantToPromo(int idApprenant)
+    {
+        return appDao.empecherApprenant(idApprenant);
+    }
 }

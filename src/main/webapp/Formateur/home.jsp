@@ -29,8 +29,8 @@
             </thead>
             <tbody>
                 <%
-                    List<Apprenant> listApprenant = (List<Apprenant>) request.getAttribute("listApprenant");
-                    for(Apprenant apprenant : listApprenant)
+                    List<Apprenant> listApprenantNotAssigned = (List<Apprenant>) request.getAttribute("listApprenantNotAssigned");
+                    for(Apprenant apprenant : listApprenantNotAssigned)
                     {
                 %>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
@@ -47,36 +47,14 @@
                                 Promo
                             </td>
                             <td class="flex justify-center py-4 px-6">
-                                <%
-                                    if(apprenant.getIdpromo() == request.getAttribute("idPromo"))
-                                    {
-                                %>
-                                    <div class="flex gap-6">
-                                        <button type="button" disabled class="p-1 border-2 border-gray-400 rounded-md text-xs font-semibold text-gray-400">Assigner</button>
-
-                                        <form action="#" method="POST">
-                                            <button type="submit" class="p-1 border-2 border-black rounded-md text-xs font-semibold text-black">
-                                                Empecher
-                                            </button>
-                                        </form>
-                                    </div>
-                                <%
-                                    }else{
-                                %>
-                                    <div class="flex gap-6">
-                                        <form action="/formateur/assign" method="POST">
-                                            <input type="hidden" name="idApprenant" value="<%=apprenant.getId()%>">
-                                            <button type="submit" class="p-1 border-2 border-black rounded-md text-xs font-semibold text-black">
-                                                Assigner
-                                            </button>
-                                        </form>
-
-                                        <button type="button" disabled class="p-1 border-2 border-gray-400 rounded-md text-xs font-semibold text-gray-400">Empecher</button>
-                                    </div>
-                                <%
-                                    }
-                                %>
-
+                                <div class="flex gap-6">
+                                    <form action="/formateur/assign" method="POST">
+                                        <input type="hidden" name="idApprenant" value="<%=apprenant.getId()%>">
+                                        <button type="submit" class="p-1 border-2 border-black rounded-md text-xs font-semibold text-black">
+                                            Assigner
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                 <%
@@ -90,7 +68,7 @@
 <%
     String promoName = (String) request.getAttribute("promoName");
 %>
-<div class="flex flex-col gap-20 w-full bg-[#f0f0f0]">
+<div class="flex flex-col gap-20 w-full bg-[#f0f0f0]" style="height: 100vh;">
     <div class="flex flex-col items-center mt-14 relative sm:rounded-lg">
         <div class="self-start text-xl text-red-600 font-semibold m-4" style="margin-left: 15rem">Promo&nbsp;<%=promoName%></div>
         <table class="w-3/4 text-sm text-left text-gray-500">
@@ -131,6 +109,14 @@
                             </td>
                             <td class="py-4 px-6">
                                 Promo
+                            </td>
+                            <td>
+                                <form action="/formateur/empecher" method="POST">
+                                    <input type="hidden" name="idApprenant" value="<%=apprenantAssigned.getId()%>">
+                                    <button type="submit" class="p-1 border-2 border-black rounded-md text-xs font-semibold text-black">
+                                        Empecher
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                 <%

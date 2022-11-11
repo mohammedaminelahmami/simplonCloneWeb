@@ -74,8 +74,8 @@ public class LoginController extends HttpServlet {
                     {
                         // redirect to "formateur" Home;
                         // getAll "apprenant"
-                        List<Apprenant> listApprenant = ApprenantService.getAllApprenant();
-                        req.setAttribute("listApprenant", listApprenant);
+//                        List<Apprenant> listApprenant = ApprenantService.getAllApprenant();
+//                        req.setAttribute("listApprenant", listApprenant);
 
                         String usernameFromSession = (String) session.getAttribute("username");
 
@@ -91,7 +91,11 @@ public class LoginController extends HttpServlet {
                         List<Apprenant> listApprenantAssigned = ApprenantService.getAllApprenantAssignedToTHisPromo(getPromoId);
                         req.setAttribute("listApprenantAssigned", listApprenantAssigned);
 
-                        req.getRequestDispatcher("./Formateur/home.jsp").forward(req, resp);
+                        // getAllApprenantNotAssignedToAnyPromo
+                        List<Apprenant> listApprenantNotAssigned = ApprenantService.getAllApprenantNotAssignedToAnyPromo();
+                        req.setAttribute("listApprenantNotAssigned", listApprenantNotAssigned);
+
+                        req.getRequestDispatcher("./Formateur/home.jsp").include(req, resp);
                     }
                 }
                 break;

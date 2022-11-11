@@ -32,7 +32,9 @@
           <element id="library" level="project" name="Maven: org.antlr:antlr4-runtime:4.10.1" />
           <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.5.0" />
           <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
-          <element id="file-copy" path="$PROJECT_DIR$/../../postgresql-42.5.0.jar" />
+          <element id="library" level="project" name="Maven: org.hibernate.orm:hibernate-c3p0:6.1.5.Final" />
+          <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.5.5" />
+          <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.19" />
         </element>
       </element>
       <element id="directory" name="META-INF">

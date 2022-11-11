@@ -105,6 +105,11 @@ public class ApprenantService {
     {
         return apprenantDao.getAllApprenantAssignedToTHisPromo(idPromo);
     }
+
+    public static List<Apprenant> getAllApprenantNotAssignedToAnyPromo()
+    {
+        return apprenantDao.getAllApprenantNotAssignedToAnyPromo();
+    }
 }
 
 

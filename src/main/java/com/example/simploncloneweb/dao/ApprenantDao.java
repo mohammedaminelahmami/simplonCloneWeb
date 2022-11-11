@@ -32,6 +32,23 @@ public class ApprenantDao {
         }
     }
 
+    public List<Apprenant> getAllApprenantNotAssignedToAnyPromo() {
+        EntityManager entityManager = PersistenceManager.beginTransaction();
+        try {
+            Query query = entityManager.createQuery("select t from Apprenant t where t.idpromo is null");
+
+            List<Apprenant> list = query.getResultList();
+            PersistenceManager.commitTransaction(entityManager); // commit
+            return list;
+        } catch (Exception e) {
+            PersistenceManager.rollbackTransaction(entityManager); // rollback
+            e.printStackTrace();
+            return null;
+        }finally {
+            entityManager.close();
+        }
+    }
+
     public List<Apprenant> getAllApprenantAssignedToTHisPromo(int idPromo) {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try {
@@ -47,6 +64,25 @@ public class ApprenantDao {
             return null;
         }finally {
             entityManager.close();
+        }
+    }
+
+    public boolean empecherApprenant(int idApprenant)
+    {
+        EntityManager entityManager = PersistenceManager.beginTransaction();
+        try {
+            Query query = entityManager.createQuery("UPDATE Apprenant a SET a.idpromo = null WHERE a.id = :idApprenant");
+            query.setParameter("idApprenant", idApprenant);
+
+            query.executeUpdate();
+            PersistenceManager.commitTransaction(entityManager); // commit
+            return true;
+        } catch (Exception e) {
+            PersistenceManager.rollbackTransaction(entityManager); // rollback
+            e.printStackTrace();
+            return false;
+        }finally {
+            entityManager.close(); // close
         }
     }
 }

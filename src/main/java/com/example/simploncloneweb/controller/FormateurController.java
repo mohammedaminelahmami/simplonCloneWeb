@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet({"/formateur/assign", "/formateur/briefs", "/formateur/addBrief", "/formateur/deleteBrief", "/formateur/updateBrief", "/formateur/rendus"})
+@WebServlet({"/formateur/assign","/formateur/empecher", "/formateur/briefs", "/formateur/addBrief", "/formateur/deleteBrief", "/formateur/updateBrief", "/formateur/rendus"})
 public class FormateurController extends HttpServlet {
     HttpSession session;
     @Override
@@ -40,6 +40,18 @@ public class FormateurController extends HttpServlet {
                     return;
                 }
                 System.out.println("errorAssign");
+                resp.sendRedirect("/home");
+                break;
+            }
+            case "/formateur/empecher":
+            {
+                String idApprenant = req.getParameter("idApprenant");
+                if(FormateurService.empechApprenantToPromo(Integer.parseInt(idApprenant)))
+                {
+                    resp.sendRedirect("/home");
+                    return;
+                }
+                System.out.println("errorEmpeche");
                 resp.sendRedirect("/home");
                 break;
             }

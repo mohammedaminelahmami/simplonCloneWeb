@@ -78,12 +78,19 @@ public class LoginController extends HttpServlet {
                         req.setAttribute("listApprenant", listApprenant);
 
                         String usernameFromSession = (String) session.getAttribute("username");
-                        req.setAttribute("promoName", PromotionService.getPromoFormateur(usernameFromSession));
 
+                        // getIdPromo
                         int getPromoId = FormateurService.getIdPromo(usernameFromSession);
                         req.setAttribute("idPromo", getPromoId);
 
-                        //
+                        // getPromoName
+                        String promoName = PromotionService.getPromoName(getPromoId);
+                        req.setAttribute("promoName", promoName);
+
+                        // getAllApprenantAssignedToTHisPromo
+                        List<Apprenant> listApprenantAssigned = ApprenantService.getAllApprenantAssignedToTHisPromo(getPromoId);
+                        req.setAttribute("listApprenantAssigned", listApprenantAssigned);
+
                         req.getRequestDispatcher("./Formateur/home.jsp").forward(req, resp);
                     }
                 }

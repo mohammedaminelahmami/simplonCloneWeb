@@ -32,10 +32,9 @@ public class PromotionService {
         return useDao.getAll();
     }
 
-    public static String getPromoFormateur(String username)
+    public static String getPromoName(int promoId)
     {
-        int idFormateur = useDaoFF.getIdFormateurByUsername(username);
-        return promotionDao.getOnePromo(idFormateur);
+        return promotionDao.getPromoName(promoId);
     }
 
     public static List<Promotion> getAllPromotionStatusFalse()

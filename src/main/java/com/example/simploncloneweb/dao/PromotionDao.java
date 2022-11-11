@@ -165,23 +165,18 @@ public class PromotionDao {
         }
     }
 
-    public String getOnePromo(int idFormateur)
+    public String getPromoName(int idPromo)
     {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try{
-            Query query = entityManager.createQuery("select t from Promotion t where t.idformateur = :idFormateur");
-            query.setParameter("idFormateur", idFormateur);
+            Query query = entityManager.createQuery("select t from Promotion t where t.id = :idPromo");
+            query.setParameter("idPromo", idPromo);
 
             Promotion promotion = (Promotion) query.getSingleResult();
             PersistenceManager.commitTransaction(entityManager);
-            if(promotion.getName() != null)
-            {
-                return promotion.getName();
-            }else{
-                return "No Promo";
-            }
-        }catch(Exception e)
-        {
+
+            return promotion.getName();
+        }catch(Exception e) {
             e.printStackTrace();
             PersistenceManager.rollbackTransaction(entityManager);
             return null;

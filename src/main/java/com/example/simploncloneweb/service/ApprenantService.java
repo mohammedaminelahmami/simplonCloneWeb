@@ -1,6 +1,7 @@
 package com.example.simploncloneweb.service;
 
 import com.example.simploncloneweb.Entity.Apprenant;
+import com.example.simploncloneweb.dao.ApprenantDao;
 import com.example.simploncloneweb.dao.UseDaoImpl;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 public class ApprenantService {
 
     final static UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
+    final static ApprenantDao apprenantDao = new ApprenantDao();
 
     public static boolean addAccount(String username, String password, String email, String nom, String prenom)
     {
@@ -97,6 +99,11 @@ public class ApprenantService {
     public static boolean deleteAccount(int id)
     {
         return useDao.delete(id);
+    }
+
+    public static List<Apprenant> getAllApprenantAssignedToTHisPromo(int idPromo)
+    {
+        return apprenantDao.getAllApprenantAssignedToTHisPromo(idPromo);
     }
 }
 

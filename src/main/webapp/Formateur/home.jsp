@@ -88,7 +88,7 @@
 </div>
 <%--| Apprenant |--%>
 <%
-    String promoName = request.getParameter("promoName");
+    String promoName = (String) request.getAttribute("promoName");
 %>
 <div class="flex flex-col gap-20 w-full bg-[#f0f0f0]">
     <div class="flex flex-col items-center mt-14 relative sm:rounded-lg">
@@ -97,12 +97,16 @@
             <thead class="text-xs text-black uppercase bg-gray-50">
             <tr>
                 <th scope="col" class="py-3 px-6">
+                    Nom & Prenom
                 </th>
                 <th scope="col" class="py-3 px-6">
+                    Username
                 </th>
                 <th scope="col" class="py-3 px-6">
+                    Email
                 </th>
                 <th scope="col" class="py-3 px-6">
+                    Promotion
                 </th>
                 <th scope="col" class="py-3 px-6">
 
@@ -110,7 +114,28 @@
             </tr>
             </thead>
             <tbody>
-                <%----%>
+                <%
+                    List<Apprenant> listApprenantAssigned = (List<Apprenant>) request.getAttribute("listApprenantAssigned");
+                    for(Apprenant apprenantAssigned : listApprenantAssigned)
+                    {
+                %>
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <%=apprenantAssigned.getNom()%> <%=apprenantAssigned.getPrenom()%>
+                            </th>
+                            <td class="py-4 px-6">
+                                <%=apprenantAssigned.getUsername()%>
+                            </td>
+                            <td class="py-4 px-6">
+                                <%=apprenantAssigned.getEmail()%>
+                            </td>
+                            <td class="py-4 px-6">
+                                Promo
+                            </td>
+                        </tr>
+                <%
+                    }
+                %>
             </tbody>
         </table>
     </div>

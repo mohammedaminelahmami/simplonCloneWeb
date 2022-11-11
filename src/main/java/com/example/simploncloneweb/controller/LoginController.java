@@ -1,6 +1,11 @@
 package com.example.simploncloneweb.controller;
 
+import com.example.simploncloneweb.Entity.Apprenant;
+import com.example.simploncloneweb.Entity.Promotion;
+import com.example.simploncloneweb.service.ApprenantService;
+import com.example.simploncloneweb.service.FormateurService;
 import com.example.simploncloneweb.service.LoginService;
+import com.example.simploncloneweb.service.PromotionService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet({"/login", "/home", "/logout"})
 public class LoginController extends HttpServlet {
@@ -54,6 +60,7 @@ public class LoginController extends HttpServlet {
                     }else if(LoginService.login(username, password).equals("formateur"))
                     {
                         session.setAttribute("role", "formateur");
+                        session.setAttribute("username", username);
                         resp.sendRedirect("/home");
                     }else{
                         resp.sendRedirect("/login");
@@ -66,6 +73,17 @@ public class LoginController extends HttpServlet {
                     }else if(session.getAttribute("role") == "formateur")
                     {
                         // redirect to "formateur" Home;
+                        // getAll "apprenant"
+                        List<Apprenant> listApprenant = ApprenantService.getAllApprenant();
+                        req.setAttribute("listApprenant", listApprenant);
+
+                        String usernameFromSession = (String) session.getAttribute("username");
+                        req.setAttribute("promoName", PromotionService.getPromoFormateur(usernameFromSession));
+
+                        int getPromoId = FormateurService.getIdPromo(usernameFromSession);
+                        req.setAttribute("idPromo", getPromoId);
+
+                        //
                         req.getRequestDispatcher("./Formateur/home.jsp").forward(req, resp);
                     }
                 }

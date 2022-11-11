@@ -36,7 +36,7 @@ public class Apprenant {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Timestamp updatedAt;
     @ManyToOne
-    @JoinColumn(name = "idpromo", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "idpromo", referencedColumnName = "id", insertable = false, updatable = false, nullable = false)
     private Promotion promotionByIdpromo;
 
     public Integer getId() {

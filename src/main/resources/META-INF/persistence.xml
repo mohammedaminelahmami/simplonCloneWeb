@@ -19,6 +19,7 @@
 
             <property name="hibernate.hbm2ddl.auto" value="update"/>
 
+            <property name="connection.pool_size" value="300"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/simplonCloneWeb" />
             <property name="javax.persistence.jdbc.user" value="postgres" />

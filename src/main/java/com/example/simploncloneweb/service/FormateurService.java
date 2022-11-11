@@ -2,6 +2,8 @@ package com.example.simploncloneweb.service;
 
 import com.example.simploncloneweb.Entity.Formateur;
 import com.example.simploncloneweb.Entity.Promotion;
+import com.example.simploncloneweb.dao.ApprenantDao;
+import com.example.simploncloneweb.dao.FormateurDao;
 import com.example.simploncloneweb.dao.PromotionDao;
 import com.example.simploncloneweb.dao.UseDaoImpl;
 
@@ -12,6 +14,8 @@ public class FormateurService {
     final static UseDaoImpl<Formateur> useDao = new UseDaoImpl<>(Formateur.class);
     final static UseDaoImpl<Promotion> useDaoP = new UseDaoImpl<>(Promotion.class);
     final static PromotionDao pDao = new PromotionDao();
+    final static ApprenantDao appDao = new ApprenantDao();
+    final static FormateurDao fDao = new FormateurDao();
 
     public static boolean addAccount(String username, String password, String email, String nom, String prenom)
     {
@@ -105,7 +109,7 @@ public class FormateurService {
 
     public static boolean deleteAccount(int id)
     {
-        int idPromo = pDao.finIdPromoByIdFormateur(id);
+        int idPromo = pDao.findIdPromoByIdFormateur(id);
         if(idPromo != -1)
         {
             Promotion promotion = useDaoP.findById(idPromo);
@@ -115,5 +119,19 @@ public class FormateurService {
         }else{
             return useDao.delete(id);
         }
+    }
+
+    public static int getIdPromo(String username)
+    {
+        int idFormateur  = fDao.getIdFormateurByUsername(username);
+        return pDao.findIdPromoByIdFormateur(idFormateur);
+    }
+
+    public static boolean assignApprenantToPromo(int idApprenant, String username)
+    {
+        // getIdPromoByUsername
+        int idFormateur  = fDao.getIdFormateurByUsername(username);
+        int idPromo = pDao.findIdPromoByIdFormateur(idFormateur);
+        return appDao.updateApprenantPromo(idApprenant, idPromo);
     }
 }

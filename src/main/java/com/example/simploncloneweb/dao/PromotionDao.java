@@ -122,7 +122,7 @@ public class PromotionDao {
     {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try{
-            Query query = entityManager.createQuery("select t from Promotion t WHERE t.id = :idPromo",Promotion.class);
+            Query query = entityManager.createQuery("select t from Promotion t WHERE t.id = :idPromo");
             query.setParameter("idPromo", idPromo);
             Promotion promotion = (Promotion) query.getSingleResult();
             if(promotion.getIdformateur() == null)
@@ -141,11 +141,11 @@ public class PromotionDao {
         }
     }
 
-    public int finIdPromoByIdFormateur(int idFormateur)
+    public int findIdPromoByIdFormateur(int idFormateur)
     {
         EntityManager entityManager = PersistenceManager.beginTransaction();
         try{
-            Query query = entityManager.createQuery("select t from Promotion t where t.idformateur = :idFormateur",Promotion.class);
+            Query query = entityManager.createQuery("select t from Promotion t where t.idformateur = :idFormateur");
             query.setParameter("idFormateur", idFormateur);
 
             Promotion promotion = (Promotion) query.getSingleResult();
@@ -160,6 +160,31 @@ public class PromotionDao {
             e.printStackTrace();
             PersistenceManager.rollbackTransaction(entityManager);
             return -1;
+        }finally {
+            entityManager.close();
+        }
+    }
+
+    public String getOnePromo(int idFormateur)
+    {
+        EntityManager entityManager = PersistenceManager.beginTransaction();
+        try{
+            Query query = entityManager.createQuery("select t from Promotion t where t.idformateur = :idFormateur");
+            query.setParameter("idFormateur", idFormateur);
+
+            Promotion promotion = (Promotion) query.getSingleResult();
+            PersistenceManager.commitTransaction(entityManager);
+            if(promotion.getName() != null)
+            {
+                return promotion.getName();
+            }else{
+                return "No Promo";
+            }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            PersistenceManager.rollbackTransaction(entityManager);
+            return null;
         }finally {
             entityManager.close();
         }

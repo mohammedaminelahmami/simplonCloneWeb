@@ -2,6 +2,7 @@ package com.example.simploncloneweb.service;
 
 import com.example.simploncloneweb.Entity.Formateur;
 import com.example.simploncloneweb.Entity.Promotion;
+import com.example.simploncloneweb.dao.FormateurDao;
 import com.example.simploncloneweb.dao.PromotionDao;
 import com.example.simploncloneweb.dao.UseDaoImpl;
 
@@ -12,6 +13,7 @@ public class PromotionService {
     final static PromotionDao pDao = new PromotionDao();
     final static UseDaoImpl<Formateur> useDaoF = new UseDaoImpl<>(Formateur.class);
     final static PromotionDao promotionDao = new PromotionDao();
+    final static FormateurDao useDaoFF = new FormateurDao();
     public static boolean addPromo(String name, int annee)
     {
         // check
@@ -28,6 +30,12 @@ public class PromotionService {
     {
         // List "Promos"
         return useDao.getAll();
+    }
+
+    public static String getPromoFormateur(String username)
+    {
+        int idFormateur = useDaoFF.getIdFormateurByUsername(username);
+        return promotionDao.getOnePromo(idFormateur);
     }
 
     public static List<Promotion> getAllPromotionStatusFalse()

@@ -36,4 +36,45 @@ public class BriefService {
             return null;
         }
     }
+
+    public static boolean lanceBrief(int idBrief)
+    {
+        try{
+            Brief rowBrief = useDao.findById(idBrief);
+            rowBrief.setStatus(true);
+
+            return useDao.update(rowBrief);
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean deleteBrief(int idBrief)
+    {
+        try{
+            return useDao.delete(idBrief);
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean updateBrief(String context, int deadline, int idBrief)
+    {
+        try{
+            Brief brief = useDao.findById(idBrief);
+
+            brief.setContext(context);
+            brief.setDeadline(deadline);
+
+            return useDao.update(brief);
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }

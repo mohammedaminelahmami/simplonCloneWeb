@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/formateur/assign","/formateur/empecher", "/formateur/briefs", "/formateur/addBrief", "/formateur/deleteBrief", "/formateur/updateBrief", "/formateur/rendus"})
+@WebServlet({"/formateur/assign","/formateur/empecher", "/formateur/briefs", "/formateur/addBrief", "/formateur/deleteBrief", "/formateur/updateBrief","/formateur/lancerBrief", "/formateur/rendus"})
 public class FormateurController extends HttpServlet {
     HttpSession session;
     @Override
@@ -80,6 +80,50 @@ public class FormateurController extends HttpServlet {
                     return;
                 }
                 System.out.println("errorAddBrief");
+                resp.sendRedirect("/formateur/briefs");
+                break;
+            }
+            case "/formateur/lancerBrief":
+            {
+                String idBrief = req.getParameter("idBrief");
+
+                if(BriefService.lanceBrief(Integer.parseInt(idBrief)))
+                {
+                    resp.sendRedirect("/formateur/briefs");
+                    // email
+                    // ---------
+                    return;
+                }
+                System.out.println("errorLancerBrief");
+                resp.sendRedirect("/formateur/briefs");
+                break;
+            }
+            case "/formateur/deleteBrief":
+            {
+                String idBrief = req.getParameter("idBrief");
+
+                if(BriefService.deleteBrief(Integer.parseInt(idBrief)))
+                {
+                    resp.sendRedirect("/formateur/briefs");
+
+                    return;
+                }
+                System.out.println("errorDeleteBrief");
+                resp.sendRedirect("/formateur/briefs");
+                break;
+            }
+            case "/formateur/updateBrief":
+            {
+                String context = req.getParameter("context");
+                String deadline = req.getParameter("deadline");
+                String idBrief = req.getParameter("idBrief");
+
+                if(BriefService.updateBrief(context, Integer.parseInt(deadline), Integer.parseInt(idBrief)))
+                {
+                    resp.sendRedirect("/formateur/briefs");
+                    return;
+                }
+                System.out.println("errorUpdateBrief");
                 resp.sendRedirect("/formateur/briefs");
                 break;
             }

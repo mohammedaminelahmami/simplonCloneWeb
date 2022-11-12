@@ -5,7 +5,7 @@
         </div>
 
         <div class="flex self-center gap-16 text-white">
-            <a href="" class="text-sm flex flex-col gap-1">
+            <a href="/formateur/briefs" class="text-sm flex flex-col gap-1">
                 <div class="self-center"><jsp:include page="../svg/briefs.jsp"/></div>
                 <div class="self-center">Briefs</div>
             </a>

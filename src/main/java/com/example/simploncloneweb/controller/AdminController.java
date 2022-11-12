@@ -173,9 +173,11 @@ public class AdminController extends HttpServlet {
                 if(req.getParameter("action").equals("apprenant"))
                 {
                     account = ApprenantService.deleteAccount(Integer.parseInt(getId));
+                    session.removeAttribute("role");
                 }else if(req.getParameter("action").equals("formateur"))
                 {
                     account = FormateurService.deleteAccount(Integer.parseInt(getId));
+                    session.removeAttribute("role");
                 }else if(req.getParameter("action").equals("promotion"))
                 {
                     account = PromotionService.deletePromo(Integer.parseInt(getId));

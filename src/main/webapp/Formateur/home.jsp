@@ -29,7 +29,7 @@
             </thead>
             <tbody>
                 <%
-                    List<Apprenant> listApprenantNotAssigned = (List<Apprenant>) request.getAttribute("listApprenantNotAssigned");
+                    List<Apprenant> listApprenantNotAssigned = (List<Apprenant>) session.getAttribute("listApprenantNotAssigned");
                     for(Apprenant apprenant : listApprenantNotAssigned)
                     {
                 %>
@@ -66,7 +66,7 @@
 </div>
 <%--| Apprenant |--%>
 <%
-    String promoName = (String) request.getAttribute("promoName");
+    String promoName = (String) session.getAttribute("promoName");
 %>
 <div class="flex flex-col gap-20 w-full bg-[#f0f0f0]" style="height: 100vh;">
     <div class="flex flex-col items-center mt-14 relative sm:rounded-lg">
@@ -93,7 +93,7 @@
             </thead>
             <tbody>
                 <%
-                    List<Apprenant> listApprenantAssigned = (List<Apprenant>) request.getAttribute("listApprenantAssigned");
+                    List<Apprenant> listApprenantAssigned = (List<Apprenant>) session.getAttribute("listApprenantAssigned");
                     for(Apprenant apprenantAssigned : listApprenantAssigned)
                     {
                 %>

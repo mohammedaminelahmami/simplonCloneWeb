@@ -115,10 +115,8 @@ public class FormateurService {
             Promotion promotion = useDaoP.findById(idPromo);
             promotion.setStatus(false);
             useDaoP.update(promotion);
-            return useDao.delete(id);
-        }else{
-            return useDao.delete(id);
         }
+        return useDao.delete(id);
     }
 
     public static int getIdPromo(String username)
@@ -130,13 +128,25 @@ public class FormateurService {
     public static boolean assignApprenantToPromo(int idApprenant, String username)
     {
         // getIdPromoByUsername
-        int idFormateur  = fDao.getIdFormateurByUsername(username);
-        int idPromo = pDao.findIdPromoByIdFormateur(idFormateur);
-        return appDao.updateApprenantPromo(idApprenant, idPromo);
+        try {
+            int idFormateur  = fDao.getIdFormateurByUsername(username);
+            int idPromo = pDao.findIdPromoByIdFormateur(idFormateur);
+            return appDao.updateApprenantPromo(idApprenant, idPromo);
+        }catch (Exception e) {
+            System.out.println("errorAssignApprenant");
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     public static boolean empechApprenantToPromo(int idApprenant)
     {
-        return appDao.empecherApprenant(idApprenant);
+        try {
+            return appDao.empecherApprenant(idApprenant);
+        }catch (Exception e) {
+            System.out.println("errorEmpecheApprenant");
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }

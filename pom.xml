@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.1.4.Final</version>
+            <version>6.1.5.Final</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -46,16 +46,6 @@
             <artifactId>postgresql</artifactId>
             <version>42.5.0</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-c3p0</artifactId>
-            <version>6.1.5.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-c3p0</artifactId>
-            <version>6.1.5.Final</version>
         </dependency>
     </dependencies>
 

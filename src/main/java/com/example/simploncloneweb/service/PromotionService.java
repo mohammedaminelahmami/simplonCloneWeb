@@ -51,10 +51,8 @@ public class PromotionService {
             Formateur formateur = useDaoF.findById(idFormateur);
             formateur.setStatus(false);
             useDaoF.update(formateur);
-            return useDao.delete(id);
-        }else{
-            return useDao.delete(id);
         }
+        return useDao.delete(id);
     }
 
     public static boolean assignerFormateur(int idFormateur, String promoName)

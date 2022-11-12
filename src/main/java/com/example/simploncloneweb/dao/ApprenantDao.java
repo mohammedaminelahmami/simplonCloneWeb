@@ -1,7 +1,6 @@
 package com.example.simploncloneweb.dao;
 
 import com.example.simploncloneweb.Entity.Apprenant;
-import com.example.simploncloneweb.Entity.Promotion;
 import com.example.simploncloneweb.helper.PersistenceManager;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -9,7 +8,6 @@ import jakarta.persistence.Query;
 import java.util.List;
 
 public class ApprenantDao {
-
     public boolean updateApprenantPromo(int idApprenant, int idPromo)
     {
         EntityManager entityManager = PersistenceManager.beginTransaction();
@@ -24,7 +22,8 @@ public class ApprenantDao {
             return true;
         }catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+//            e.printStackTrace();
             PersistenceManager.rollbackTransaction(entityManager);
             return false;
         }finally {

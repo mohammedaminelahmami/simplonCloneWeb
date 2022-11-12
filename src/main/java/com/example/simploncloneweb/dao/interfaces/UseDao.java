@@ -8,4 +8,5 @@ public interface UseDao<T> {
     boolean delete(int id);
     T findById(int id);
     List<T> getAll();
+    List<T> getAllWhere(String field, Object value);
 }

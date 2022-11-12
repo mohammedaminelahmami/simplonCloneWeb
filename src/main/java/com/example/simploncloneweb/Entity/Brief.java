@@ -16,6 +16,9 @@ public class Brief {
     @Column(name = "deadline")
     private Integer deadline;
     @Basic
+    @Column(name = "status")
+    private Boolean status;
+    @Basic
     @Column(name = "promoid")
     private Integer promoid;
     @ManyToOne
@@ -36,6 +39,13 @@ public class Brief {
 
     public void setContext(String context) {
         this.context = context;
+    }
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public Integer getDeadline() {

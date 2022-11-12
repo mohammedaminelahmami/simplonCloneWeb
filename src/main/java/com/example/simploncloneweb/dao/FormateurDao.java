@@ -5,6 +5,8 @@ import com.example.simploncloneweb.helper.PersistenceManager;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
+import java.util.List;
+
 public class FormateurDao {
     public int getIdFormateurByUsername(String username)
     {
@@ -13,10 +15,16 @@ public class FormateurDao {
             Query query = entityManager.createQuery("select t from Formateur t where t.username = :username");
             query.setParameter("username", username);
 
-            Formateur formateur = (Formateur) query.getSingleResult();
+            List<Formateur> formateurs = query.getResultList();
+            int a = -2;
+            for(Formateur formateur : formateurs)
+            {
+                a = formateur.getId();
+                break;
+            }
 
             PersistenceManager.commitTransaction(entityManager);
-            return formateur.getId();
+            return a;
         }catch(Exception e)
         {
             e.printStackTrace();

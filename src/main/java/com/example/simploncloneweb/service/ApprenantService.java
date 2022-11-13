@@ -11,6 +11,28 @@ public class ApprenantService {
     final static UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
     final static ApprenantDao apprenantDao = new ApprenantDao();
 
+    public static int getIdApprenant(String username)
+    {
+        try {
+            return apprenantDao.findIdByUsername(username);
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+    }
+    public static int getIdPromo(int idApprenant)
+    {
+        try {
+            Apprenant apprenant = useDao.findById(idApprenant);
+            return apprenant.getIdpromo();
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+    }
+
     public static boolean addAccount(String username, String password, String email, String nom, String prenom)
     {
         // Regex
@@ -58,8 +80,6 @@ public class ApprenantService {
 
     public static boolean updateApprenant(int id, String nom, String prenom, String email, String username, String password)
     {
-        Apprenant apprenant = useDao.findById(id);
-
         // Regex
 //        boolean checkUsername = Regex.checkRegex("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" ,username);
 //        boolean checkPassword = Regex.checkRegex("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" ,password);
@@ -84,6 +104,8 @@ public class ApprenantService {
 
         if(msgError.equals(""))
         {
+            Apprenant apprenant = useDao.findById(id);
+
             apprenant.setUsername(username);
             apprenant.setPassword(password);
             apprenant.setEmail(email);
@@ -111,7 +133,3 @@ public class ApprenantService {
         return apprenantDao.getAllApprenantNotAssignedToAnyPromo();
     }
 }
-
-
-
-

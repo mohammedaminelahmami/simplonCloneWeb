@@ -1,6 +1,7 @@
 package com.example.simploncloneweb.dao;
 
 import com.example.simploncloneweb.Entity.Apprenant;
+import com.example.simploncloneweb.Entity.Brief;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,10 +21,18 @@ class UseDaoImplTest {
     }
 
     @Test
-    void testToCharArray()
+    void testFindByIdWithValidId()
     {
-        String name = "amine";
-        char[] nameArray = name.toCharArray();
-        System.out.println();
+        UseDaoImpl<Brief> useDao = new UseDaoImpl<>(Brief.class);
+        Brief brief = useDao.findById(8);
+        assertNotNull(brief);
     }
+
+//    @Test
+//    void testGetWhereInvalidInfo()
+//    {
+//        UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
+//        assertNotNull(useDao.getWhere("id", 1));
+//        //System.out.println(useDao.getWhere("id", 1).getIdpromo());
+//    }
 }

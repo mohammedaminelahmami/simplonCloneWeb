@@ -1,10 +1,8 @@
 package com.example.simploncloneweb.controller;
 
 import com.example.simploncloneweb.Entity.Apprenant;
-import com.example.simploncloneweb.service.ApprenantService;
-import com.example.simploncloneweb.service.FormateurService;
-import com.example.simploncloneweb.service.LoginService;
-import com.example.simploncloneweb.service.PromotionService;
+import com.example.simploncloneweb.Entity.Brief;
+import com.example.simploncloneweb.service.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -56,6 +54,7 @@ public class LoginController extends HttpServlet {
                     if(LoginService.login(username, password).equals("apprenant"))
                     {
                         session.setAttribute("role", "apprenant");
+                        session.setAttribute("username", username);
                         resp.sendRedirect("/home");
                     }else if(LoginService.login(username, password).equals("formateur"))
                     {
@@ -68,6 +67,13 @@ public class LoginController extends HttpServlet {
                 }else{
                     if(session.getAttribute("role") == "apprenant")
                     {
+                        String usernameApprenant = (String) session.getAttribute("username");
+                        // getIdPromo
+                        int idPromo = ApprenantService.getIdApprenant(usernameApprenant);
+                        // getAllBriefs
+
+                         List<Brief> briefs = BriefService.getAllBriefsPromoFalse(idPromo);
+                         req.setAttribute("briefs", briefs);
                         // redirect to "apprenant" Home;
                         req.getRequestDispatcher("./Apprenant/home.jsp").forward(req, resp);
                     }else if(session.getAttribute("role") == "formateur")

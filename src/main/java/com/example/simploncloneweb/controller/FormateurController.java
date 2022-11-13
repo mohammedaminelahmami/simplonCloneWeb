@@ -36,6 +36,7 @@ public class FormateurController extends HttpServlet {
             case "/formateur/assign":
             {
                 String idApprenant = req.getParameter("idApprenant");
+                // username "formateur"
                 String username = (String) session.getAttribute("username");
                 if(FormateurService.assignApprenantToPromo(Integer.parseInt(idApprenant), username))
                 {
@@ -62,7 +63,7 @@ public class FormateurController extends HttpServlet {
             {
                 int idPromo = (int) session.getAttribute("idPromo");
 
-                List<Brief> briefs = BriefService.getAllBriefsPromo(idPromo);
+                List<Brief> briefs = BriefService.getAllBriefsPromoAll(idPromo);
                 req.setAttribute("briefs", briefs);
 
                 req.getRequestDispatcher("../Formateur/briefs.jsp").forward(req, resp);

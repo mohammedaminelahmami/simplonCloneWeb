@@ -1,6 +1,7 @@
 package com.example.simploncloneweb.service;
 
 import com.example.simploncloneweb.Entity.Brief;
+import com.example.simploncloneweb.dao.BriefDao;
 import com.example.simploncloneweb.dao.UseDaoImpl;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 public class BriefService {
 
     final static UseDaoImpl<Brief> useDao = new UseDaoImpl<>(Brief.class);
+    final static BriefDao briefDao = new BriefDao();
     public static boolean addBrief(String context, int deadline, int idPromo)
     {
         try{
@@ -26,10 +28,21 @@ public class BriefService {
         }
     }
 
-    public static List<Brief> getAllBriefsPromo(int idPromo)
+    public static List<Brief> getAllBriefsPromoAll(int idPromo)
     {
         try{
             return useDao.getAllWhere("promoid", idPromo);
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public static List<Brief> getAllBriefsPromoFalse(int idPromo)
+    {
+        try{
+            return briefDao.getAllBriefsPromo(idPromo);
         }catch(Exception e)
         {
             System.out.println(e.getMessage());

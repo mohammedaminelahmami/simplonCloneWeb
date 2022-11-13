@@ -3,7 +3,7 @@
         <div class="m-10 text-xl font-semibold">Ma promo</div>
         <div class="flex justify-center gap-20 m-10 ">
             <div class="" style="width: 80%; height: 40%">
-                <img src="http://localhost/simplonImgs/b.webp" class="rounded-md" style="width: 100%; height: 100%" alt="">
+                <img src="http://localhost/simplonImgs/imgBrief.svg" class="rounded-md" style="width: 100%; height: 100%" alt="">
             </div>
             <div class="flex flex-col justify-center gap-8">
                 <div class="text-xl font-semibold">YouCode Safi 2022 Brendan Eich</div>

@@ -1,6 +1,7 @@
 package com.example.simploncloneweb.dao;
 
 import com.example.simploncloneweb.Entity.Apprenant;
+import com.example.simploncloneweb.Entity.Promotion;
 import com.example.simploncloneweb.helper.PersistenceManager;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -82,6 +83,26 @@ public class ApprenantDao {
             return false;
         }finally {
             entityManager.close(); // close
+        }
+    }
+
+    public int findIdByUsername(String username)
+    {
+        EntityManager entityManager = PersistenceManager.beginTransaction();
+        try{
+            Query query = entityManager.createQuery("select t from Apprenant t WHERE t.username = :username ");
+            query.setParameter("username", username);
+
+            Apprenant apprenant = (Apprenant) query.getSingleResult();
+            PersistenceManager.commitTransaction(entityManager);
+            return apprenant.getId(); // return (int) id
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            PersistenceManager.rollbackTransaction(entityManager);
+            return -1;
+        }finally {
+            entityManager.close();
         }
     }
 }

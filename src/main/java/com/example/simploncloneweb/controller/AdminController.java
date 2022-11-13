@@ -146,21 +146,31 @@ public class AdminController extends HttpServlet {
                 String username = req.getParameter("username");
                 String password = req.getParameter("password");
 
-                if(req.getParameter("action").equals("apprenant"))
+                String action = req.getParameter("action");
+
+//                System.out.println(nom);
+//                System.out.println(prenom);
+//                System.out.println(email);
+//                System.out.println(username);
+//                System.out.println(password);
+
+                if(action.equals("apprenant"))
                 {
                     if(ApprenantService.updateApprenant(Integer.parseInt(getId), nom, prenom, email, username, password))
                     {
                         resp.sendRedirect("/admin/users");
                         return;
                     }
+                    System.out.println("errorEditApprenant");
                     resp.sendRedirect("/admin/users");
-                }else if(req.getParameter("action").equals("formateur"))
+                }else if(action.equals("formateur"))
                 {
                     if(FormateurService.updateFormateur(Integer.parseInt(getId), nom, prenom, email, username, password))
                     {
                         resp.sendRedirect("/admin/users");
                         return;
                     }
+                    System.out.println("errorAdminEdit");
                     resp.sendRedirect("/admin/users");
                 }
                 break;

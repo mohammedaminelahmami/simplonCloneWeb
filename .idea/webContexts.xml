@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Admin/adminUsers.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Admin/dashboard.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Formateur/briefs.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Formateur" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Formateur/home.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Formateur" />
       </map>
     </option>

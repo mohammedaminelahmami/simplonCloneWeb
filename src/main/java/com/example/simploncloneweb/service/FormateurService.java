@@ -114,6 +114,7 @@ public class FormateurService {
         {
             Promotion promotion = useDaoP.findById(idPromo);
             promotion.setStatus(false);
+            promotion.setIdformateur(null);
             useDaoP.update(promotion);
         }
         return useDao.delete(id);

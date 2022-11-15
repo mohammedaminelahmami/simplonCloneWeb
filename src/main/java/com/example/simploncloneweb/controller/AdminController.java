@@ -33,63 +33,88 @@ public class AdminController extends HttpServlet {
         String path = req.getServletPath();
         switch (path)
         {
-            case "/admin/login":
-            {
-                if(session.getAttribute("admin") == null)
-                {
-                    req.getRequestDispatcher("../Admin/adminLogin.jsp").forward(req, resp);
-                    return;
-                }
-                resp.sendRedirect("/dashboard");
-                break;
-            }
-            case "/dashboard":
-            {
-                if(session.getAttribute("admin") == null)
-                {
-                    String username = req.getParameter("username");
-                    String password = req.getParameter("password");
+            case "/admin/login"->adminLogin(req, resp, session);
+            case "/dashboard"->dashboard(req, resp, session);
+            case "/admin/users"->adminUsers(req, resp, session);
+            case "/admin/addPromo"->adminAddPromo(req, resp, session);
+            case "/admin/addAccount"->adminAddAccount(req, resp, session);
+            case "/admin/edit"->adminEdit(req, resp, session);
+            case "/admin/delete"->adminDelete(req, resp, session);
+            case "/admin/assign"->adminAssign(req, resp, session);
+            case "/admin/empeche"->adminEmpeche(req, resp, session);
+            case "/admin/logout"->adminLogout(req, resp, session);
+        }
+    }
 
-                    if(AdminService.login(username, password))
-                    {
-                        Admin admin = new Admin();
-                        session.setAttribute("admin", admin);
-                        resp.sendRedirect("/dashboard");
-                    }else{
-                        req.getRequestDispatcher("../Admin/adminLogin.jsp").forward(req, resp);
-                    }
+    protected void adminLogin(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("admin") == null)
+            {
+                req.getRequestDispatcher("../Admin/adminLogin.jsp").forward(req, resp);
+                return;
+            }
+            resp.sendRedirect("/dashboard");
+        }catch (Exception e)
+        {
+            System.out.println("errorAdminLogin : "+e.getMessage());
+        }
+    }
+    protected void dashboard(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try{
+            if(session.getAttribute("admin") == null)
+            {
+                String username = req.getParameter("username");
+                String password = req.getParameter("password");
+
+                if(AdminService.login(username, password))
+                {
+                    Admin admin = new Admin();
+                    session.setAttribute("admin", admin);
+                    resp.sendRedirect("/dashboard");
                 }else{
-                    req.getRequestDispatcher("./Admin/dashboard.jsp").forward(req, resp);
+                    resp.sendRedirect("/admin/login");
                 }
-                break;
+            }else{
+                req.getRequestDispatcher("./Admin/dashboard.jsp").forward(req, resp);
             }
-            case "/admin/users":
+        }catch (Exception e)
+        {
+            System.out.println("errorDashboard : "+e.getMessage());
+        }
+    }
+    protected void adminUsers(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("admin") != null)
             {
-                if(session.getAttribute("admin") != null)
-                {
-                    // getAll "apprenant"
-                    List<Apprenant> listApprenant = ApprenantService.getAllApprenant();
-                    req.setAttribute("listApprenant", listApprenant);
+                // getAll "apprenant"
+                List<Apprenant> listApprenant = ApprenantService.getAllApprenant();
+                req.setAttribute("listApprenant", listApprenant);
 
-                    // getAll "formateur"
-                    List<Formateur> listFormateur = FormateurService.getAllFormateur();
-                    req.setAttribute("listFormateur", listFormateur);
+                // getAll "formateur"
+                List<Formateur> listFormateur = FormateurService.getAllFormateur();
+                req.setAttribute("listFormateur", listFormateur);
 
-                    // getAll "promos"
-                    List<Promotion> listPromotion = PromotionService.getAllPromotion();
-                    req.setAttribute("listPromotion", listPromotion);
+                // getAll "promos"
+                List<Promotion> listPromotion = PromotionService.getAllPromotion();
+                req.setAttribute("listPromotion", listPromotion);
 
-                    // getAll "promos --> false"
-                    List<Promotion> listPromosFalse = PromotionService.getAllPromotionStatusFalse();
-                    req.setAttribute("listPromosFalse", listPromosFalse);
+                // getAll "promos --> false"
+                List<Promotion> listPromosFalse = PromotionService.getAllPromotionStatusFalse();
+                req.setAttribute("listPromosFalse", listPromosFalse);
 
-                    req.getRequestDispatcher("../Admin/adminUsers.jsp").forward(req, resp);
-                    return;
-                }
-                resp.sendRedirect("/admin/login");
-                break;
+                req.getRequestDispatcher("../Admin/adminUsers.jsp").forward(req, resp);
+                return;
             }
-            case "/admin/addPromo":
+            resp.sendRedirect("/admin/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorAdminUsers : "+e.getMessage());
+        }
+
+    }
+    protected void adminAddPromo(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("admin") != null)
             {
                 String name = req.getParameter("name");
                 String annee = req.getParameter("annee");
@@ -102,41 +127,52 @@ public class AdminController extends HttpServlet {
                 }
                 System.out.println("error");
                 resp.sendRedirect("/admin/users");
-                break;
+                return;
             }
-            case "/admin/addAccount":
+            resp.sendRedirect("/admin/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorAdminAddPromo"+e.getMessage());
+        }
+    }
+    protected void adminAddAccount(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("admin") != null)
             {
-                if(session.getAttribute("admin") != null)
-                {
-                    String username = req.getParameter("username");
-                    String password = req.getParameter("password");
-                    String email = req.getParameter("email");
-                    String nom = req.getParameter("nom");
-                    String prenom = req.getParameter("prenom");
-                    boolean checkNull = username != null && password != null && email != null && nom != null && prenom != null;
+                String username = req.getParameter("username");
+                String password = req.getParameter("password");
+                String email = req.getParameter("email");
+                String nom = req.getParameter("nom");
+                String prenom = req.getParameter("prenom");
+                boolean checkNull = password != null && email != null && nom != null && prenom != null;
 
-                    boolean account = false;
-                    if (req.getParameter("action").equals("apprenant")) {
-                        //assert username != null;
-                        account = ApprenantService.addAccount(username, password, email, nom, prenom) && checkNull;
-                    } else if(req.getParameter("action").equals("formateur")){
-                        //assert username != null;
-                        account = FormateurService.addAccount(username, password, email, nom, prenom) && checkNull;
-                    }
-
-                    if(account)
-                    {
-                        resp.sendRedirect("/admin/users");
-                    }else{
-                        System.out.println("Error !!");
-                        resp.sendRedirect("/admin/users");
-                    }
-                    return;
+                boolean account = false;
+                if (req.getParameter("action").equals("apprenant")) {
+                    //assert username != null;
+                    account = ApprenantService.addAccount(username, password, email, nom, prenom) && checkNull;
+                } else if(req.getParameter("action").equals("formateur")){
+                    //assert username != null;
+                    account = FormateurService.addAccount(username, password, email, nom, prenom) && checkNull;
                 }
-                resp.sendRedirect("admin/login");
-                break;
+
+                if(account)
+                {
+                    resp.sendRedirect("/admin/users");
+                }else{
+                    System.out.println("Error !!");
+                    resp.sendRedirect("/admin/users");
+                }
+                return;
             }
-            case "/admin/edit":
+            resp.sendRedirect("/admin/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorAdminAddAccount : "+e.getMessage());
+        }
+    }
+    protected void adminEdit(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("admin") != null)
             {
                 String getId = req.getParameter("id");
 
@@ -147,12 +183,6 @@ public class AdminController extends HttpServlet {
                 String password = req.getParameter("password");
 
                 String action = req.getParameter("action");
-
-//                System.out.println(nom);
-//                System.out.println(prenom);
-//                System.out.println(email);
-//                System.out.println(username);
-//                System.out.println(password);
 
                 if(action.equals("apprenant"))
                 {
@@ -173,9 +203,17 @@ public class AdminController extends HttpServlet {
                     System.out.println("errorAdminEdit");
                     resp.sendRedirect("/admin/users");
                 }
-                break;
+                return;
             }
-            case "/admin/delete":
+            resp.sendRedirect("/admin/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorAdminEdit : "+e.getMessage());
+        }
+    }
+    protected void adminDelete(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("admin") != null)
             {
                 String getId = req.getParameter("id");
                 boolean account = false;
@@ -199,11 +237,19 @@ public class AdminController extends HttpServlet {
                 }
                 resp.sendRedirect("/admin/users");
                 System.out.println("errorDelete");
-                break;
+                return;
             }
-            case "/admin/assign":
+            resp.sendRedirect("/admin/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorAdminDelete : "+e.getMessage());
+        }
+    }
+    protected void adminAssign(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("admin") != null)
             {
-                 // assign formateur to promo
+                // assign formateur to promo
                 String idFormateur = req.getParameter("idFormateur");
                 String promoName = req.getParameter("promoName");
 
@@ -214,9 +260,17 @@ public class AdminController extends HttpServlet {
                 }
                 System.out.println("errorAssign");
                 resp.sendRedirect("/admin/users");
-                break;
+                return;
             }
-            case "/admin/empeche":
+            resp.sendRedirect("/admin/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorAdminAssign : "+e.getMessage());
+        }
+    }
+    protected void adminEmpeche(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("admin") != null)
             {
                 // (!assign) promo from formateur
                 String idFormateur = req.getParameter("idFormateur");
@@ -226,15 +280,23 @@ public class AdminController extends HttpServlet {
                     return;
                 }
                 resp.sendRedirect("/admin/users");
-                break;
+                return;
             }
-            case "/admin/logout":
-            {
-                session.removeAttribute("user");
-                session.invalidate();
-                resp.sendRedirect("/admin/login");
-                break;
-            }
+            resp.sendRedirect("/admin/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorAdminEmpeche : "+e.getMessage());
         }
     }
+    protected void adminLogout(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            session.removeAttribute("user");
+            session.invalidate();
+            resp.sendRedirect("/admin/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorAdminLogout : "+e.getMessage());
+        }
+    }
+
 }

@@ -298,7 +298,7 @@
                                                         <form class="space-y-6" action="/admin/edit" method="post">
                                                             <div>
                                                                 <label for="nomeE" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom</label>
-                                                                <input type="text" name="nom" value="<%=apprenant.getNom()%>" placeholder="Nom" id="nomee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+                                                                <input type="text" name="nom" value="<%=apprenant.getNom()%>" placeholder="Nom" id="nomeE" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
                                                             </div>
                                                             <div>
                                                                 <label for="prnomE" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Prenom</label>
@@ -540,7 +540,7 @@
                     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter promo</h3>
                     <form class="space-y-6" action="/admin/addPromo" method="POST">
                         <div>
-                            <label for="Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
+                            <label for="nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
                             <input type="text" name="name" id="Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Name" required="">
                         </div>
 
@@ -557,7 +557,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 </body>

@@ -29,6 +29,14 @@ class UseDaoImplTest {
     }
 
 //    @Test
+//    void testGetCountValidCount()
+//    {
+//        UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);
+//        assertEquals(5, useDao.getCount());
+//        System.out.println(useDao.getCount());
+//    }
+
+//    @Test
 //    void testGetWhereInvalidInfo()
 //    {
 //        UseDaoImpl<Apprenant> useDao = new UseDaoImpl<>(Apprenant.class);

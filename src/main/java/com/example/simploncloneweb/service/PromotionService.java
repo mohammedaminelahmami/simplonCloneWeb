@@ -1,5 +1,6 @@
 package com.example.simploncloneweb.service;
 
+import com.example.simploncloneweb.Entity.Apprenant;
 import com.example.simploncloneweb.Entity.Formateur;
 import com.example.simploncloneweb.Entity.Promotion;
 import com.example.simploncloneweb.dao.FormateurDao;
@@ -44,6 +45,15 @@ public class PromotionService {
 
     public static boolean deletePromo(int id)
     {
+        UseDaoImpl<Apprenant> daoApp = new UseDaoImpl<>(Apprenant.class);
+        List<Apprenant> listApprenant = daoApp.getAllWhere("idpromo", id);
+
+        for(Apprenant apprenant : listApprenant)
+        {
+            apprenant.setIdpromo(null);
+            daoApp.update(apprenant);
+        }
+
         // getIdFormateurByIdPromo
         int idFormateur = pDao.findIdFormateur(id);
         if(idFormateur != -1)

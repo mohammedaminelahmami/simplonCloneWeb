@@ -19,7 +19,7 @@ public class Email {
         props.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
 
         String adminEmail = "lahmamimohammedamine@gmail.com";
-        String adminPassword = "************";
+        String adminPassword = "*************";
 
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
@@ -30,7 +30,7 @@ public class Email {
         Message message = prepareMessage(session, adminEmail, recipient, name, description);
         try {
             Transport transport = session.getTransport("smtp");
-            transport.connect("lahmamimohammedamine@gmail.com", "************");
+            transport.connect("lahmamimohammedamine@gmail.com", "*************");
             // Send message
             transport.sendMessage(message, message.getAllRecipients());
             System.out.println("Sent message successfully....");

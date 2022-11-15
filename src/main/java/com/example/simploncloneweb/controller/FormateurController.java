@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/formateur/assign","/formateur/empecher", "/formateur/briefs", "/formateur/addBrief", "/formateur/deleteBrief", "/formateur/updateBrief","/formateur/lancerBrief", "/formateur/rendus"})
+@WebServlet({"/formateur/assign","/formateur/empecher", "/formateur/briefs", "/formateur/addBrief", "/formateur/deleteBrief", "/formateur/updateBrief","/formateur/lancerBrief", "/formateur/rendus", "/formateur/profile"})
 public class FormateurController extends HttpServlet {
     HttpSession session;
     @Override
@@ -36,7 +36,19 @@ public class FormateurController extends HttpServlet {
 
         switch (path)
         {
-            case "/formateur/assign":
+            case "/formateur/assign"->formateurAssign(req, resp, session);
+            case "/formateur/empecher"->formateurEmpecher(req, resp, session);
+            case "/formateur/briefs"->formateurBriefs(req, resp, session);
+            case "/formateur/addBrief"->formateurAddBrief(req, resp, session);
+            case "/formateur/lancerBrief"->formateurLancerBrief(req, resp, session);
+            case "/formateur/deleteBrief"->formateurDeleteBrief(req, resp, session);
+            case "/formateur/updateBrief"->formateurUpdateBrief(req, resp, session);
+        }
+    }
+
+    protected void formateurAssign(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("role") != null)
             {
                 String idApprenant = req.getParameter("idApprenant");
                 // username "formateur"
@@ -48,9 +60,17 @@ public class FormateurController extends HttpServlet {
                 }
                 System.out.println("errorAssign");
                 resp.sendRedirect("/home");
-                break;
+                return;
             }
-            case "/formateur/empecher":
+            resp.sendRedirect("/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorFormateurAssign : "+e.getMessage());
+        }
+    }
+    protected void formateurEmpecher(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("role") != null)
             {
                 String idApprenant = req.getParameter("idApprenant");
                 if(FormateurService.empechApprenantToPromo(Integer.parseInt(idApprenant)))
@@ -60,24 +80,34 @@ public class FormateurController extends HttpServlet {
                 }
                 System.out.println("errorEmpeche");
                 resp.sendRedirect("/home");
-                break;
+                return;
             }
-            case "/formateur/briefs":
+            resp.sendRedirect("/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorFormateurEmpecher : "+e.getMessage());
+        }
+    }
+    protected void formateurBriefs(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try{
+            if(session.getAttribute("role") != null)
             {
                 int idPromo = (int) session.getAttribute("idPromo");
-                System.out.println(idPromo);
-                try{
-                    List<Brief> briefs = BriefService.getAllBriefsPromoAll(idPromo);
-                    req.setAttribute("briefs", briefs);
+                List<Brief> briefs = BriefService.getAllBriefsPromoAll(idPromo);
+                req.setAttribute("briefs", briefs);
 
-                    req.getRequestDispatcher("../Formateur/briefs.jsp").forward(req, resp);
-                }catch (Exception e)
-                {
-                    System.out.println(" error /formateur/briefs "+e.getMessage());
-                }
-                break;
+                req.getRequestDispatcher("../Formateur/briefs.jsp").forward(req, resp);
+                return;
             }
-            case "/formateur/addBrief":
+            resp.sendRedirect("/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorFormateurBriefs : "+e.getMessage());
+        }
+    }
+    protected void formateurAddBrief(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("role") != null)
             {
                 String context = req.getParameter("context");
                 String deadline = req.getParameter("deadline");
@@ -90,9 +120,17 @@ public class FormateurController extends HttpServlet {
                 }
                 System.out.println("errorAddBrief");
                 resp.sendRedirect("/formateur/briefs");
-                break;
+                return;
             }
-            case "/formateur/lancerBrief":
+            resp.sendRedirect("/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorFormateuraddBrief : "+e.getMessage());
+        }
+    }
+    protected void formateurLancerBrief(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("role") != null)
             {
                 String idBrief = req.getParameter("idBrief");
 
@@ -103,16 +141,24 @@ public class FormateurController extends HttpServlet {
                     List<Apprenant> getAllApprenantPromo = ApprenantService.getAllApprenantAssignedToTHisPromo(idPromo);
                     for(Apprenant apprenant : getAllApprenantPromo)
                     {
-                         Email.sendEmail(apprenant.getEmail(), "New Brief has been Created !", "");
+                        Email.sendEmail(apprenant.getEmail(), "New Brief has been Created !", "");
                     }
                     resp.sendRedirect("/formateur/briefs");
                     return;
                 }
                 System.out.println("errorLancerBrief");
                 resp.sendRedirect("/formateur/briefs");
-                break;
+                return;
             }
-            case "/formateur/deleteBrief":
+            resp.sendRedirect("/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorFormateurLancerBrief : "+e.getMessage());
+        }
+    }
+    protected void formateurDeleteBrief(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("role") != null)
             {
                 String idBrief = req.getParameter("idBrief");
 
@@ -124,9 +170,17 @@ public class FormateurController extends HttpServlet {
                 }
                 System.out.println("errorDeleteBrief");
                 resp.sendRedirect("/formateur/briefs");
-                break;
+                return;
             }
-            case "/formateur/updateBrief":
+            resp.sendRedirect("/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorFormateurDeleteBrief : "+e.getMessage());
+        }
+    }
+    protected void formateurUpdateBrief(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
+        try {
+            if(session.getAttribute("role") != null)
             {
                 String context = req.getParameter("context");
                 String deadline = req.getParameter("deadline");
@@ -139,8 +193,12 @@ public class FormateurController extends HttpServlet {
                 }
                 System.out.println("errorUpdateBrief");
                 resp.sendRedirect("/formateur/briefs");
-                break;
+                return;
             }
+            resp.sendRedirect("/login");
+        }catch (Exception e)
+        {
+            System.out.println("errorFormateurUpdateBrief : "+e.getMessage());
         }
     }
 }

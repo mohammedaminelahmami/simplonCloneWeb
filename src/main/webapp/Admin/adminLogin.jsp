@@ -9,15 +9,10 @@
                         <div class="lg:w-6/12 px-4 md:px-0">
                             <div class="md:p-12 md:mx-6">
                                 <div class="text-center">
-                                    <img
-                                        class="mx-auto w-48"
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                                        alt="logo"
-                                    />
                                     <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">Admin</h4>
                                 </div>
                                 <p class="mb-4">Please login to your account</p>
-                                <form action="${pageContext.request.contextPath}/dashboard" class="mb-4" method="POST">
+                                <form action="/dashboard" class="mb-4" method="POST">
                                     <input
                                         type="text"
                                         class="mb-4 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"

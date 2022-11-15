@@ -99,36 +99,6 @@ public class Formateur {
         this.createdAt = createdAt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Formateur formateur = (Formateur) o;
-
-        if (id != null ? !id.equals(formateur.id) : formateur.id != null) return false;
-        if (username != null ? !username.equals(formateur.username) : formateur.username != null) return false;
-        if (password != null ? !password.equals(formateur.password) : formateur.password != null) return false;
-        if (email != null ? !email.equals(formateur.email) : formateur.email != null) return false;
-        if (nom != null ? !nom.equals(formateur.nom) : formateur.nom != null) return false;
-        if (prenom != null ? !prenom.equals(formateur.prenom) : formateur.prenom != null) return false;
-        if (createdAt != null ? !createdAt.equals(formateur.createdAt) : formateur.createdAt != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (nom != null ? nom.hashCode() : 0);
-        result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        return result;
-    }
-
     public Collection<Promotion> getPromotionsById() {
         return promotionsById;
     }

@@ -76,6 +76,9 @@ public class AuthController extends HttpServlet {
                 if(session.getAttribute("role") == "apprenant")
                 {
                     String usernameApprenant = (String) session.getAttribute("username");
+
+                    String fullName = ApprenantService.getFullName(usernameApprenant);
+                    session.setAttribute("fullName", fullName);
                     // getIdPromo
                     int idPromo = ApprenantService.getIdApprenant(usernameApprenant);
                     session.setAttribute("idPromo", idPromo);

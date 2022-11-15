@@ -23,13 +23,13 @@
     </div>
 
     <div class="flex gap-10 self-center mr-14 text-white">
-        <a href="" class="text-sm flex flex-col gap-1">
-            <div class="self-center"><jsp:include page="../../svg/profile.jsp"/></div>
-            <div class="self-center">Profil</div>
-        </a>
+<%--        <a href="" class="text-sm flex flex-col gap-1">--%>
+<%--            <div class="self-center"><jsp:include page="../../svg/profile.jsp"/></div>--%>
+<%--            <div class="self-center">Profil</div>--%>
+<%--        </a>--%>
         <button type="button" id="dropdownDefault" data-dropdown-toggle="dropdown" class="text-sm flex flex-col gap-1">
-            <div class="self-center"><jsp:include page="../../svg/notifs.jsp"/></div>
-            <div class="self-center">Notifs</div>
+            <div class="self-center"><jsp:include page="../../svg/profile.jsp"/></div>
+            <div class="self-center">Parametre</div>
         </button>
     </div>
 
@@ -41,10 +41,10 @@
                 <a href="/home" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
             </li>
             <li>
-                <a href="/formateur/profile" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                <a href="/home" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
             </li>
             <li>
-                <a href="/logout" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                <a href="/logout" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Se deconnecter</a>
             </li>
         </ul>
     </div>

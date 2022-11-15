@@ -6,7 +6,7 @@
                 <img src="http://localhost/simplonImgs/imgBrief.svg" class="rounded-md" style="width: 100%; height: 100%" alt="">
             </div>
             <div class="flex flex-col justify-center gap-8">
-                <div class="text-xl font-semibold">YouCode Safi 2022 Brendan Eich</div>
+                <div class="text-xl font-semibold">YouCode Safi 2022</div>
                 <div class="text-sm">Promotion 2022 du referentiel developpement web et web mobile & CDA a la<br>fabrique de YouCode Safi au Maroc</div>
                 <div class="flex gap-20">
                     <div class="flex gap-2">

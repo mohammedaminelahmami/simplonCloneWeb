@@ -11,7 +11,7 @@
             <img src="http://localhost/simplonImgs/profile.png" class="w-10 h-10" alt="">
         </div>
         <div class="mt-10">
-            <div>Bonjour <span class="font-semibold">lahmami Mohammed Amine,</span></div>
+            <div>Bonjour <span class="font-semibold"><%=session.getAttribute("fullName")%>,</span></div>
             <div>Bienvenue sur Simplon</div>
         </div>
 

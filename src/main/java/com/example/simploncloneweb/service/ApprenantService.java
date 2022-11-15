@@ -21,6 +21,20 @@ public class ApprenantService {
             return -1;
         }
     }
+
+    public static String getFullName(String username)
+    {
+        try {
+            List<Apprenant> apprenant = useDao.getAllWhere("username", username);
+            String fullName = apprenant.get(0).getNom() +" "+ apprenant.get(0).getPrenom();
+            return fullName;
+        }catch (Exception e)
+        {
+            System.out.println("errorGetFullName : "+e.getMessage());
+            return null;
+        }
+    }
+
     public static int getIdPromo(int idApprenant)
     {
         try {

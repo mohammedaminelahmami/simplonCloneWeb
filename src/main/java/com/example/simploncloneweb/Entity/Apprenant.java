@@ -111,40 +111,6 @@ public class Apprenant {
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Apprenant apprenant = (Apprenant) o;
-
-        if (id != null ? !id.equals(apprenant.id) : apprenant.id != null) return false;
-        if (username != null ? !username.equals(apprenant.username) : apprenant.username != null) return false;
-        if (password != null ? !password.equals(apprenant.password) : apprenant.password != null) return false;
-        if (email != null ? !email.equals(apprenant.email) : apprenant.email != null) return false;
-        if (nom != null ? !nom.equals(apprenant.nom) : apprenant.nom != null) return false;
-        if (prenom != null ? !prenom.equals(apprenant.prenom) : apprenant.prenom != null) return false;
-        if (idpromo != null ? !idpromo.equals(apprenant.idpromo) : apprenant.idpromo != null) return false;
-        if (createdAt != null ? !createdAt.equals(apprenant.createdAt) : apprenant.createdAt != null) return false;
-        if (updatedAt != null ? !updatedAt.equals(apprenant.updatedAt) : apprenant.updatedAt != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (nom != null ? nom.hashCode() : 0);
-        result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
-        result = 31 * result + (idpromo != null ? idpromo.hashCode() : 0);
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
-        return result;
-    }
-
     public Promotion getPromotionByIdpromo() {
         return promotionByIdpromo;
     }
